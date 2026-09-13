@@ -66,7 +66,7 @@ export default function HomePage() {
         className="mx-auto max-w-7xl px-6 pb-28 pt-24 lg:px-10 lg:pb-40 lg:pt-36"
       >
         <p className="mb-8 text-sm uppercase tracking-[0.2em] text-black/50">
-          Technology entrepreneur
+          Techn entrepreneur
         </p>
 
         <h1 className="max-w-5xl text-5xl font-medium leading-[0.98] tracking-[-0.07em] sm:text-6xl lg:text-8xl">

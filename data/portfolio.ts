@@ -6,7 +6,7 @@ export const founder = {
   description:
     "I create software, digital products, and technology-driven experiences that help businesses grow and turn ambitious ideas into reality.",
   status: "Building independently",
-  email: "tunudoley@gmail.com",
+  email: "tunudoley7@gmail.com",
 };
 
 export const ventures = [
