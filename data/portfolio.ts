@@ -10,7 +10,7 @@ export const founder = {
   status: "Building independently",
   email: "tunudoley7@gmail.com",
   location: "India",
-  website: "https://www.tunudoley.com",
+  website: "https://tunudoley.in",
   keywords: [
     "Tunu Doley",
     "Tunu Doley entrepreneur",

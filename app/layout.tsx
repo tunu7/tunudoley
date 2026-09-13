@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
   display: "swap",
 });
 
-const siteUrl = "https://www.tunudoley.com";
+const siteUrl = "https://tunudoley.in";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
