@@ -1,56 +1,73 @@
 
 export const founder = {
   name: "Tunu Doley",
-  role: "Founder · Product Builder",
-  headline: "Building what's next.",
+  role: "Technology Entrepreneur · Founder · Product Builder",
+  headline: "Building ventures. Enabling growth.",
   description:
-    "I create software, digital products, and technology-driven experiences that help businesses grow and turn ambitious ideas into reality.",
+    "Tunu Doley is a technology entrepreneur, founder, and product builder creating software, digital products, and technology-driven solutions that help businesses grow.",
+  shortDescription:
+    "I build technology-driven businesses, digital products, and growth systems that turn ambitious ideas into practical solutions.",
   status: "Building independently",
   email: "tunudoley7@gmail.com",
+  location: "India",
+  website: "https://www.tunudoley.com",
+  keywords: [
+    "Tunu Doley",
+    "Tunu Doley entrepreneur",
+    "technology entrepreneur",
+    "startup founder",
+    "product builder",
+    "business technology",
+    "digital products",
+    "business growth systems",
+  ],
 };
 
 export const ventures = [
   {
     id: "01",
     name: "Business Technology",
-    category: "Growth systems",
+    category: "Growth Systems",
     description:
-      "Digital tools that help small and medium businesses attract customers, manage operations, and scale.",
+      "Building digital tools and technology solutions that help small and medium-sized businesses attract customers, improve operations, and scale.",
     status: "Building",
   },
   {
     id: "02",
     name: "Digital Products",
-    category: "Product development",
+    category: "Product Development",
     description:
-      "Useful software products designed to solve real problems and create new opportunities.",
+      "Creating useful software products that solve real-world problems, improve user experiences, and unlock new opportunities.",
     status: "Exploring",
   },
   {
     id: "03",
     name: "Private Venture",
-    category: "Undisclosed startup",
+    category: "Technology Startup",
     description:
-      "A technology venture being developed quietly. More will be revealed at the right time.",
+      "A technology venture being developed privately, focused on creating meaningful solutions and long-term value.",
     status: "Private",
   },
 ];
 
 export const products = [
   {
-    name: "Business Apps",
-    description: "Digital experiences designed for growth.",
-    category: "Web",
+    name: "Business Applications",
+    description:
+      "Custom digital experiences and web applications designed to help businesses operate and grow.",
+    category: "Web Development",
   },
   {
-    name: "Management systems",
-    description: "Tools that make everyday operations simpler.",
-    category: "Systems",
+    name: "Business Management Systems",
+    description:
+      "Technology solutions that simplify everyday operations, improve efficiency, and support better decision-making.",
+    category: "Business Systems",
   },
   {
-    name: "Digital products",
-    description: "Ideas transformed into useful software.",
-    category: "Products",
+    name: "Digital Products",
+    description:
+      "Software products designed to solve meaningful problems and create practical value for users.",
+    category: "Product Development",
   },
 ];
 
