@@ -1,126 +1,34 @@
-
 @import "tailwindcss";
 
-:root {
-  --background: #f4f1eb;
-  --foreground: #171717;
-  --muted: #73716c;
-  --line: #dedad2;
-  --accent: #c47d55;
-  --dark: #171717;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  margin: 0;
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
-}
-
-::selection {
-  background: #d9b69f;
-  color: #171717;
-}
-
-.font-display {
-  letter-spacing: -0.065em;
-  line-height: 0.95;
-}
-
-.section-label {
-  font-size: 10px;
-  font-weight: 700;
-  letter-spacing: 0.24em;
-  text-transform: uppercase;
-  color: var(--muted);
-}
-
-.text-muted {
-  color: var(--muted);
-}
-
-.line {
-  border-color: var(--line);
-}
-
-.reveal {
-  animation: reveal 0.8s ease both;
-}
-
-@keyframes reveal {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
+@keyframes floatCube {
+  0%,
+  100% {
+    transform: translateY(0) rotateZ(0deg);
   }
 
-  to {
-    opacity: 1;
+  50% {
+    transform: translateY(-12px) rotateZ(2deg);
+  }
+}
+
+@keyframes floatSmall {
+  0%,
+  100% {
     transform: translateY(0);
   }
-}
 
-/* Minimal 3D object */
-.scene {
-  perspective: 1000px;
-}
-
-.object-3d {
-  transform: rotateX(8deg) rotateY(-14deg);
-  transform-style: preserve-3d;
-  transition: transform 700ms ease;
-}
-
-.scene:hover .object-3d {
-  transform: rotateX(2deg) rotateY(-4deg);
-}
-
-.object-face {
-  position: absolute;
-  inset: 0;
-  border: 1px solid rgba(23, 23, 23, 0.12);
-  border-radius: 18px;
-  background: linear-gradient(145deg, #fffdf8, #ded7cc);
-  box-shadow: 20px 25px 45px rgba(23, 23, 23, 0.13);
-}
-
-.object-top {
-  transform: translateZ(48px);
-}
-
-.object-side {
-  transform: rotateY(90deg) translateZ(-48px);
-  transform-origin: right;
-  background: #cfc6b8;
-}
-
-.object-screen {
-  position: absolute;
-  inset: 12px;
-  border-radius: 12px;
-  background: #1b1d1e;
-  color: #f4f1eb;
-  padding: 18px;
+  50% {
+    transform: translateY(-16px);
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
-
-  .reveal {
-    animation: none;
-  }
-
-  .object-3d {
-    transition: none;
-    transform: none;
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
