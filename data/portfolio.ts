@@ -1,25 +1,36 @@
-
 export const founder = {
   name: "Tunu Doley",
-  role: "Technology Entrepreneur · Founder · Product Builder",
-  headline: "Building ventures. Enabling growth.",
+
+  role: "Founder · Technology Entrepreneur · Product Builder",
+
+  headline: "Building quietly. Thinking long term.",
+
   description:
-    "Tunu Doley is a technology entrepreneur, founder, and product builder creating software, digital products, and technology-driven solutions that help businesses grow.",
+    "Tunu Doley is an independent founder and technology entrepreneur exploring the intersection of software, business, creativity, and human behaviour. He builds digital products, experiments with new ideas, and develops technology-driven ventures designed to create meaningful long-term value.",
+
   shortDescription:
-    "I build technology-driven businesses, digital products, and growth systems that turn ambitious ideas into practical solutions.",
+    "I build, experiment, and explore ideas at the intersection of technology, business, and creativity—turning curiosity into products, systems, and ventures.",
+
   status: "Building independently",
+
   email: "tunudoley7@gmail.com",
+
   location: "India",
+
   website: "https://tunudoley.in",
+
   keywords: [
     "Tunu Doley",
+    "Tunu Doley founder",
     "Tunu Doley entrepreneur",
     "technology entrepreneur",
-    "startup founder",
+    "independent founder",
     "product builder",
-    "business technology",
     "digital products",
-    "business growth systems",
+    "technology ventures",
+    "business systems",
+    "creative technology",
+    "startup exploration",
   ],
 };
 
@@ -27,53 +38,73 @@ export const ventures = [
   {
     id: "01",
     name: "Business Technology",
-    category: "Growth Systems",
+    category: "Systems · Infrastructure · Growth",
+
     description:
-      "Building digital tools and technology solutions that help small and medium-sized businesses attract customers, improve operations, and scale.",
+      "Exploring how thoughtful technology can make businesses more capable, efficient, and adaptable. The focus is on building systems that simplify complexity and create room for better decisions and sustainable growth.",
+
     status: "Building",
   },
+
   {
     id: "02",
     name: "Digital Products",
-    category: "Product Development",
+    category: "Ideas · Software · Experience",
+
     description:
-      "Creating useful software products that solve real-world problems, improve user experiences, and unlock new opportunities.",
+      "Turning interesting problems into useful digital products. From early concepts to working systems, the goal is to create experiences that feel simple, intentional, and genuinely valuable.",
+
     status: "Exploring",
   },
+
   {
     id: "03",
     name: "Private Venture",
-    category: "Technology Startup",
+    category: "Long-term · Technology · Experimentation",
+
     description:
-      "A technology venture being developed privately, focused on creating meaningful solutions and long-term value.",
+      "A privately developed technology venture built around a long-term idea. Details remain private while the foundations, direction, and possibilities continue to take shape.",
+
     status: "Private",
   },
 ];
 
 export const products = [
   {
-    name: "Business Applications",
+    name: "Digital Experiences",
+
     description:
-      "Custom digital experiences and web applications designed to help businesses operate and grow.",
-    category: "Web Development",
+      "Designing and building thoughtful web experiences that connect ideas, people, and possibilities through technology.",
+
+    category: "Product Thinking",
   },
+
   {
-    name: "Business Management Systems",
+    name: "Business Systems",
+
     description:
-      "Technology solutions that simplify everyday operations, improve efficiency, and support better decision-making.",
-    category: "Business Systems",
+      "Exploring ways to turn scattered processes into clear, connected systems that help people work with more focus and less friction.",
+
+    category: "Systems Thinking",
   },
+
   {
-    name: "Digital Products",
+    name: "Technology Experiments",
+
     description:
-      "Software products designed to solve meaningful problems and create practical value for users.",
-    category: "Product Development",
+      "Testing new tools, concepts, and workflows to understand what is possible—and what is actually worth building.",
+
+    category: "Continuous Learning",
   },
 ];
 
 export const principles = [
-  "Build with purpose.",
-  "Learn by shipping.",
-  "Make technology useful.",
-  "Think beyond the next release.",
+  "Start with first principles.",
+  "Build to understand.",
+  "Make complexity feel simple.",
+  "Stay curious longer than others.",
+  "Prefer substance over noise.",
+  "Think in systems, not shortcuts.",
+  "Ship, reflect, and improve.",
+  "Build for the long term.",
 ];

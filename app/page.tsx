@@ -12,7 +12,7 @@ export default function HomePage() {
     "@type": "Person",
     name: founder.name,
     url: founder.website,
-    jobTitle: "Technology Entrepreneur, Founder, and Product Builder",
+    jobTitle: "Founder and Technology Entrepreneur",
     description: founder.description,
     email: `mailto:${founder.email}`,
     address: {
@@ -23,16 +23,16 @@ export default function HomePage() {
       "Technology Entrepreneurship",
       "Software Development",
       "Digital Products",
-      "Business Growth",
       "Product Development",
       "Business Technology",
+      "Creative Technology",
     ],
   };
 
   const organizationSchema = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Tunu Doley",
+    name: founder.name,
     url: founder.website,
     founder: {
       "@type": "Person",
@@ -40,6 +40,8 @@ export default function HomePage() {
     },
     description: founder.description,
   };
+
+  const closeMenu = () => setMenuOpen(false);
 
   return (
     <main
@@ -63,7 +65,7 @@ export default function HomePage() {
 
       {/* Header */}
       <header className="border-b border-black/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 lg:px-10">
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
           <a
             href="#top"
             aria-label="Tunu Doley home"
@@ -74,14 +76,14 @@ export default function HomePage() {
 
           <nav
             aria-label="Main navigation"
-            className="hidden gap-8 text-sm md:flex"
+            className="hidden items-center gap-8 text-sm md:flex"
           >
             <a href="#about" className="transition hover:opacity-50">
               About
             </a>
 
             <a href="#work" className="transition hover:opacity-50">
-              What I do
+              Focus
             </a>
 
             <a href="#ventures" className="transition hover:opacity-50">
@@ -97,7 +99,7 @@ export default function HomePage() {
             href="#contact"
             className="hidden rounded-full border border-black px-5 py-2.5 text-sm transition hover:bg-black hover:text-white md:block"
           >
-            Let&apos;s talk
+            Say hello
           </a>
 
           <button
@@ -119,19 +121,19 @@ export default function HomePage() {
             className="border-t border-black/10 px-6 py-6 md:hidden"
           >
             <div className="flex flex-col gap-5 text-lg">
-              <a href="#about" onClick={() => setMenuOpen(false)}>
+              <a href="#about" onClick={closeMenu}>
                 About
               </a>
 
-              <a href="#work" onClick={() => setMenuOpen(false)}>
-                What I do
+              <a href="#work" onClick={closeMenu}>
+                Focus
               </a>
 
-              <a href="#ventures" onClick={() => setMenuOpen(false)}>
+              <a href="#ventures" onClick={closeMenu}>
                 Ventures
               </a>
 
-              <a href="#contact" onClick={() => setMenuOpen(false)}>
+              <a href="#contact" onClick={closeMenu}>
                 Contact
               </a>
             </div>
@@ -145,7 +147,7 @@ export default function HomePage() {
         className="mx-auto max-w-7xl px-6 pb-28 pt-24 lg:px-10 lg:pb-40 lg:pt-36"
       >
         <p className="mb-8 text-sm uppercase tracking-[0.2em] text-black/50">
-          Tech entrepreneur · Founder · Builder
+          Tech Entrepreneur
         </p>
 
         <h1
@@ -154,30 +156,29 @@ export default function HomePage() {
         >
           Building ventures.
           <br />
-          <span className="text-black/40">Enabling growth.</span>
+          <span className="text-black/40">Following curiosity.</span>
         </h1>
 
         <div className="mt-10 max-w-2xl">
           <p className="text-xl leading-relaxed text-black/65 md:text-2xl">
-            I&apos;m {founder.name}, a technology entrepreneur and product
-            builder. I create digital products, business technology, and
-            growth-focused solutions that turn ambitious ideas into reality.
+            I&apos;m {founder.name}. I build, experiment, and explore the
+            intersection of technology, business, and creativity.
           </p>
         </div>
 
         <div className="mt-10 flex flex-wrap gap-4">
           <a
-            href="#about"
+            href="#ventures"
             className="rounded-full bg-black px-6 py-3 text-sm text-white transition hover:opacity-80"
           >
-            About me ↗
+            See what I&apos;m building ↗
           </a>
 
           <a
-            href="#contact"
+            href="#about"
             className="rounded-full border border-black/20 px-6 py-3 text-sm transition hover:bg-black hover:text-white"
           >
-            Let&apos;s talk
+            A little about me
           </a>
         </div>
       </section>
@@ -198,27 +199,25 @@ export default function HomePage() {
               id="about-heading"
               className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
             >
-              Ideas are easy.
+              Curious by nature.
               <br />
-              Execution matters.
+              Restless by choice.
             </h2>
 
             <p className="mt-8 text-lg leading-relaxed text-black/60">
-              I combine technology, business, and creativity to build useful
-              solutions, develop digital products, and help businesses improve
-              their operations and grow with purpose.
+              I&apos;m drawn to ideas that challenge the obvious and
+              possibilities that haven&apos;t been explored enough.
             </p>
 
             <p className="mt-5 text-lg leading-relaxed text-black/60">
-              My work focuses on turning ideas into practical ventures,
-              building systems that create value, and exploring new ways
-              technology can solve real-world problems.
+              I learn by building, think in systems, and look for simple
+              ways to turn ambitious ideas into something real.
             </p>
           </div>
         </div>
       </section>
 
-      {/* What I do */}
+      {/* Focus */}
       <section
         id="work"
         aria-labelledby="work-heading"
@@ -226,7 +225,7 @@ export default function HomePage() {
       >
         <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
           <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            02 / What I do
+            02 / Focus
           </p>
 
           <div>
@@ -234,42 +233,42 @@ export default function HomePage() {
               id="work-heading"
               className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
             >
-              Build better.
+              A few things
               <br />
-              Grow smarter.
+              on my mind.
             </h2>
 
             <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
               <article className="py-6">
                 <h3 className="text-xl font-medium">
-                  Build businesses
+                  Digital products
                 </h3>
 
                 <p className="mt-2 text-black/60">
-                  Turning ambitious ideas into practical ventures, products,
-                  and technology-driven businesses.
+                  Turning interesting ideas into things people can
+                  actually use.
                 </p>
               </article>
 
               <article className="py-6">
                 <h3 className="text-xl font-medium">
-                  Improve operations
+                  New ventures
                 </h3>
 
                 <p className="mt-2 text-black/60">
-                  Creating digital systems and business applications that
-                  simplify workflows and improve efficiency.
+                  Exploring opportunities at the intersection of technology
+                  and human needs.
                 </p>
               </article>
 
               <article className="py-6">
                 <h3 className="text-xl font-medium">
-                  Strengthen brands
+                  Systems and experiments
                 </h3>
 
                 <p className="mt-2 text-black/60">
-                  Helping businesses use technology, digital experiences, and
-                  creative solutions to connect with customers and grow.
+                  Finding patterns, simplifying complexity, and testing
+                  better ways to do things.
                 </p>
               </article>
             </div>
@@ -294,10 +293,15 @@ export default function HomePage() {
                 id="ventures-heading"
                 className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
               >
-                Exploring ideas.
+                Things I&apos;m
                 <br />
-                Building possibilities.
+                building.
               </h2>
+
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-black/60">
+                A glimpse into the ideas, ventures, and experiments taking
+                shape.
+              </p>
 
               <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
                 {ventures.map((venture) => (
@@ -333,7 +337,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Products and capabilities */}
+      {/* Capabilities */}
       <section
         id="products"
         aria-labelledby="products-heading"
@@ -341,7 +345,7 @@ export default function HomePage() {
       >
         <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
           <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            04 / Capabilities
+            04 / Toolkit
           </p>
 
           <div>
@@ -349,9 +353,9 @@ export default function HomePage() {
               id="products-heading"
               className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
             >
-              Technology with
+              Tools change.
               <br />
-              practical value.
+              Curiosity stays.
             </h2>
 
             <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
@@ -390,9 +394,9 @@ export default function HomePage() {
               id="principles-heading"
               className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
             >
-              How I approach
+              A few things
               <br />
-              building.
+              I believe.
             </h2>
 
             <ul className="mt-12 divide-y divide-black/15 border-y border-black/15">
@@ -428,13 +432,14 @@ export default function HomePage() {
             id="contact-heading"
             className="max-w-4xl text-5xl font-medium leading-[0.98] tracking-[-0.07em] md:text-7xl"
           >
-            Let&apos;s build what&apos;s next.
+            Always open
+            <br />
+            to the unexpected.
           </h2>
 
           <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
-            Have an idea, business challenge, or potential collaboration in
-            mind? Get in touch and let&apos;s explore what we can build
-            together.
+            Ideas, conversations, collaborations, or simply something
+            interesting.
           </p>
 
           <a
@@ -454,7 +459,7 @@ export default function HomePage() {
           </p>
 
           <p>
-            Technology Entrepreneur · Founder · Full Stack Developer
+            Building quietly. Thinking long term.
           </p>
         </div>
       </footer>
