@@ -1,26 +1,126 @@
+
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
+  --background: #f4f1eb;
   --foreground: #171717;
+  --muted: #73716c;
+  --line: #dedad2;
+  --accent: #c47d55;
+  --dark: #171717;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
+  margin: 0;
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: #d9b69f;
+  color: #171717;
+}
+
+.font-display {
+  letter-spacing: -0.065em;
+  line-height: 0.95;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.text-muted {
+  color: var(--muted);
+}
+
+.line {
+  border-color: var(--line);
+}
+
+.reveal {
+  animation: reveal 0.8s ease both;
+}
+
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Minimal 3D object */
+.scene {
+  perspective: 1000px;
+}
+
+.object-3d {
+  transform: rotateX(8deg) rotateY(-14deg);
+  transform-style: preserve-3d;
+  transition: transform 700ms ease;
+}
+
+.scene:hover .object-3d {
+  transform: rotateX(2deg) rotateY(-4deg);
+}
+
+.object-face {
+  position: absolute;
+  inset: 0;
+  border: 1px solid rgba(23, 23, 23, 0.12);
+  border-radius: 18px;
+  background: linear-gradient(145deg, #fffdf8, #ded7cc);
+  box-shadow: 20px 25px 45px rgba(23, 23, 23, 0.13);
+}
+
+.object-top {
+  transform: translateZ(48px);
+}
+
+.object-side {
+  transform: rotateY(90deg) translateZ(-48px);
+  transform-origin: right;
+  background: #cfc6b8;
+}
+
+.object-screen {
+  position: absolute;
+  inset: 12px;
+  border-radius: 12px;
+  background: #1b1d1e;
+  color: #f4f1eb;
+  padding: 18px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal {
+    animation: none;
+  }
+
+  .object-3d {
+    transition: none;
+    transform: none;
+  }
 }
