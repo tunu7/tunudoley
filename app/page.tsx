@@ -2,7 +2,7 @@
 "use client";
 
 import { useState } from "react";
-import { founder, ventures, products, principles } from "@/data/portfolio";
+import { founder, ventures, principles } from "@/data/portfolio";
 
 export default function HomePage() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -63,92 +63,130 @@ export default function HomePage() {
         }}
       />
 
-      {/* Header */}
-      <header className="border-b border-black/10">
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
-          <a
-            href="#top"
-            aria-label="Tunu Doley home"
-            className="text-xl font-semibold tracking-[-0.08em]"
-          >
-            TD.
-          </a>
+      {/* Floating Navbar */}
+<header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
+  <div className="mx-auto flex max-w-5xl items-center justify-between rounded-full border border-black/8 bg-[#f7f6f2]/75 px-4 py-3 shadow-[0_8px_40px_rgba(0,0,0,0.04)] backdrop-blur-xl transition-all duration-500 sm:px-5">
+    {/* Logo */}
+    <a
+      href="#top"
+      aria-label="Tunu Doley home"
+      className="text-lg font-semibold tracking-[-0.08em] transition-opacity hover:opacity-50"
+    >
+      TD.
+    </a>
 
-          <nav
-            aria-label="Main navigation"
-            className="hidden items-center gap-8 text-sm md:flex"
-          >
-            <a href="#about" className="transition hover:opacity-50">
-              About
-            </a>
+    {/* Desktop Navigation */}
+    <nav
+      aria-label="Main navigation"
+      className="hidden items-center gap-1 rounded-full bg-black/[0.035] p-1 text-sm md:flex"
+    >
+      <a
+        href="#about"
+        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
+      >
+        About
+      </a>
 
-            <a href="#work" className="transition hover:opacity-50">
-              Focus
-            </a>
+      <a
+        href="#work"
+        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
+      >
+        Focus
+      </a>
 
-            <a href="#ventures" className="transition hover:opacity-50">
-              Ventures
-            </a>
+      <a
+        href="#ventures"
+        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
+      >
+        Ventures
+      </a>
 
-            <a href="#contact" className="transition hover:opacity-50">
-              Contact
-            </a>
-          </nav>
+      <a
+        href="#contact"
+        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
+      >
+        Contact
+      </a>
+    </nav>
 
-          <a
-            href="#contact"
-            className="hidden rounded-full border border-black px-5 py-2.5 text-sm transition hover:bg-black hover:text-white md:block"
-          >
-            Say hello
-          </a>
+    {/* Right Side */}
+    <div className="flex items-center gap-3">
+      <a
+        href="#contact"
+        className="hidden rounded-full bg-black px-4 py-2 text-xs text-white transition-all duration-300 hover:bg-black/75 sm:block"
+      >
+        Say hello ↗
+      </a>
 
-          <button
-            type="button"
-            onClick={() => setMenuOpen(!menuOpen)}
-            className="text-sm md:hidden"
-            aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-            aria-expanded={menuOpen}
-            aria-controls="mobile-navigation"
-          >
-            {menuOpen ? "Close" : "Menu"}
-          </button>
-        </div>
+      <button
+        type="button"
+        onClick={() => setMenuOpen(!menuOpen)}
+        className="rounded-full border border-black/10 px-3 py-2 text-xs transition-all duration-300 hover:bg-black hover:text-white md:hidden"
+        aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={menuOpen}
+        aria-controls="mobile-navigation"
+      >
+        {menuOpen ? "Close" : "Menu"}
+      </button>
+    </div>
+  </div>
 
-        {menuOpen && (
-          <nav
-            id="mobile-navigation"
-            aria-label="Mobile navigation"
-            className="border-t border-black/10 px-6 py-6 md:hidden"
-          >
-            <div className="flex flex-col gap-5 text-lg">
-              <a href="#about" onClick={closeMenu}>
-                About
-              </a>
+  {/* Mobile Navigation */}
+  {menuOpen && (
+    <nav
+      id="mobile-navigation"
+      aria-label="Mobile navigation"
+      className="mx-auto mt-2 max-w-5xl rounded-3xl border border-black/8 bg-[#f7f6f2]/90 p-5 shadow-[0_8px_40px_rgba(0,0,0,0.05)] backdrop-blur-xl md:hidden"
+    >
+      <div className="flex flex-col gap-1">
+        <a
+          href="#about"
+          onClick={closeMenu}
+          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
+        >
+          About
+        </a>
 
-              <a href="#work" onClick={closeMenu}>
-                Focus
-              </a>
+        <a
+          href="#work"
+          onClick={closeMenu}
+          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
+        >
+          Focus
+        </a>
 
-              <a href="#ventures" onClick={closeMenu}>
-                Ventures
-              </a>
+        <a
+          href="#ventures"
+          onClick={closeMenu}
+          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
+        >
+          Ventures
+        </a>
 
-              <a href="#contact" onClick={closeMenu}>
-                Contact
-              </a>
-            </div>
-          </nav>
-        )}
-      </header>
+        <a
+          href="#contact"
+          onClick={closeMenu}
+          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
+        >
+          Contact
+        </a>
+      </div>
+    </nav>
+  )}
+</header>
 
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
         className="mx-auto max-w-7xl px-6 pb-28 pt-24 lg:px-10 lg:pb-40 lg:pt-36"
       >
-        <p className="mb-8 text-sm uppercase tracking-[0.2em] text-black/50">
-          Tech Entrepreneur
-        </p>
+        <div className="mb-8 flex items-center gap-3">
+  <span className="h-px w-8 bg-black/40" />
+
+  <span className="rounded-full border border-black/15 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-black/45">
+    Tech Entrepreneur
+  </span>
+</div>
 
         <h1
           id="hero-heading"
@@ -332,48 +370,6 @@ export default function HomePage() {
                   </article>
                 ))}
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Capabilities */}
-      <section
-        id="products"
-        aria-labelledby="products-heading"
-        className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32"
-      >
-        <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-          <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            04 / Toolkit
-          </p>
-
-          <div>
-            <h2
-              id="products-heading"
-              className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
-            >
-              Tools change.
-              <br />
-              Curiosity stays.
-            </h2>
-
-            <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
-              {products.map((product) => (
-                <article key={product.name} className="py-6">
-                  <p className="text-sm text-black/40">
-                    {product.category}
-                  </p>
-
-                  <h3 className="mt-2 text-xl font-medium">
-                    {product.name}
-                  </h3>
-
-                  <p className="mt-2 text-black/60">
-                    {product.description}
-                  </p>
-                </article>
-              ))}
             </div>
           </div>
         </div>
