@@ -73,9 +73,9 @@ export default function HomePage() {
           aria-labelledby="hero-heading"
           className="relative flex min-h-[100svh] touch-pan-y flex-col px-5 pb-10 pt-24 sm:px-8 lg:justify-center lg:pb-0 lg:pt-28"
         >
-          <Stage n="00" label="Core" hint="Scroll to transform" className="mb-6 min-h-[220px] flex-1" />
+          <Stage n="00" label="Core" hint="Drag to spin" className="mb-6 min-h-[220px] flex-1" />
           <div className="mx-auto w-full max-w-6xl">
-            <div className="lg:max-w-[56%]">
+            <div className="lg:max-w-[60%]">
               <h1 id="hero-heading">
                 <span className="mb-5 inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-3 py-1.5 font-mono text-[11px] font-normal uppercase tracking-[0.12em] text-fg/70 backdrop-blur lg:mb-6">
                   <span className="relative flex size-1.5">
@@ -84,17 +84,18 @@ export default function HomePage() {
                   </span>
                   {founder.name} · Founder, building in AI
                 </span>
-                <span className="block text-[clamp(2.4rem,7vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
-                  <span className="block">Building an AI company.</span>
-                  <span className="block text-fg/45">
-                    Open to <span className="text-accent">interesting</span> work.
+                <span className="block text-[clamp(2.4rem,6.4vw,4.75rem)] font-semibold leading-[0.98] tracking-[-0.045em]">
+                  <span className="block">I build AI that</span>
+                  <span className="block">
+                    <span className="text-accent">actually works.</span>
                   </span>
+                  <span className="block text-fg/45">Not just in demos.</span>
                 </span>
               </h1>
 
               <p className="mt-5 max-w-lg text-[1.05rem] leading-relaxed text-fg/65 sm:text-lg lg:mt-6">
-                Most of my time goes into my own company. The rest goes into a few paid projects I
-                can&apos;t stop thinking about.
+                I&apos;m Tunu, founder of an early-stage AI company in India. On the side, I help a few
+                teams ship the AI features their roadmap keeps promising.
               </p>
 
               <div className="mt-7 grid grid-cols-2 gap-3 sm:flex lg:mt-8">
@@ -102,11 +103,11 @@ export default function HomePage() {
                   See my work ↓
                 </a>
                 <a href="#work" className="btn btn-ghost h-12 px-5 sm:px-6">
-                  Work with me
+                  Got a project?
                 </a>
               </div>
 
-              <Caption className="mt-10">Drag to spin the core · scroll to see it change</Caption>
+              <Caption className="mt-10">Hover to poke it · drag to spin · scroll to melt it</Caption>
             </div>
           </div>
         </section>
@@ -114,26 +115,26 @@ export default function HomePage() {
         {/* About */}
         <Section id="about" n="01" label="About" headingId="about-heading">
           <h2 id="about-heading" className="heading">
-            Founder first. <span className="text-accent">Engineer</span> at heart.
+            Founder by day. <span className="text-accent">Engineer</span> by night. <span className="text-fg/45">(Also by day.)</span>
           </h2>
-          <Stage n="01" label="Helix" hint="Founder + engineer" className="mt-8 h-[280px]" />
+          <Stage n="01" label="Linked" hint="Founder + engineer" className="mt-8 h-[280px]" />
           <div className="mt-6 space-y-5 text-[1.05rem] leading-relaxed text-fg/65 sm:text-lg">
             <p>
-              I like problems that look impossible on day one and obvious by day ninety. AI has made a lot more
-              of them worth taking on, so I&apos;m building a company around it.
+              Some people pitch. I&apos;d rather ship. I write the code, talk to the users and fix the thing at
+              2am, because that&apos;s how you actually find out what works.
             </p>
             <p>
-              I stay close to the code, get from idea to working product quickly, and care more about what ships
-              than what sounds good in a pitch deck. That&apos;s also what I bring to client work.
+              AI just opened up a whole new pile of hard problems worth solving. So I&apos;m building a company
+              around it, and I bring the same hands-on habit to every client project.
             </p>
           </div>
 
           <dl className="panel mt-8 grid grid-cols-1 sm:grid-cols-2">
             {[
               ["Currently", "Building an AI company"],
-              ["Also", "Taking on select projects"],
+              ["Also", "Saying yes to a few projects"],
               ["Based in", founder.location],
-              ["Reach me", founder.email],
+              ["Inbox", founder.email],
             ].map(([k, v], i) => (
               <div
                 key={k}
@@ -147,18 +148,18 @@ export default function HomePage() {
             ))}
           </dl>
 
-          <Caption className="mt-6">Two strands, founder and engineer, wound into one</Caption>
+          <Caption className="mt-6">Two rings, one chain: founder and engineer, linked</Caption>
         </Section>
 
         {/* Building */}
         <Section id="ventures" n="02" label="Building" headingId="ventures-heading">
           <h2 id="ventures-heading" className="heading">
-            What I&apos;m <span className="text-accent">building.</span>
+            Where my <span className="text-accent">hours go.</span>
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-fg/60">
-            One company, a few client projects and a steady stream of experiments.
+            One company. A few client projects. Way too many side experiments.
           </p>
-          <Stage n="02" label="System" hint="Tap a card below" className="mt-8 h-[320px]" />
+          <Stage n="02" label="Stack" hint="Tap a card below" className="mt-8 h-[320px]" />
 
           <div className="mt-8 flex flex-col gap-3 lg:mt-10">
             {ventures.map((v, i) => (
@@ -179,7 +180,7 @@ export default function HomePage() {
             ))}
           </div>
 
-          <Caption className="mt-6">Hover or tap a card to light up its part of the system</Caption>
+          <Caption className="mt-6">Hover a card to light up its piece: company, clients, experiments</Caption>
         </Section>
 
         {/* Work with me */}
@@ -188,10 +189,10 @@ export default function HomePage() {
             Got a hard problem? <span className="text-accent">Good.</span>
           </h2>
           <p className="mt-5 text-lg leading-relaxed text-fg/60">
-            I take on a few paid projects at a time, and only ones I find genuinely interesting. If yours is one
-            of them, you get my full attention.
+            Your roadmap says &ldquo;add AI&rdquo;. Your team is already stretched. That&apos;s where I come in.
+            A few projects at a time, full attention on each.
           </p>
-          <Stage n="03" label="Services" hint="Tap a service below" className="mt-8 h-[320px]" />
+          <Stage n="03" label="Toolkit" hint="Tap a service below" className="mt-8 h-[320px]" />
 
           <div className="mt-8 flex flex-col gap-3 lg:mt-10">
             {services.map((s, i) => (
@@ -207,8 +208,8 @@ export default function HomePage() {
 
           <div className="mt-6 flex flex-col items-start gap-4 rounded-2xl border border-dashed border-accent/40 bg-bg/60 p-6 backdrop-blur sm:flex-row sm:items-center sm:justify-between">
             <p className="leading-relaxed">
-              <span className="font-semibold">A good fit:</span>{" "}
-              <span className="text-fg/60">a clear problem, a team that moves quickly, and room to do it properly.</span>
+              <span className="font-semibold">Good fit:</span>{" "}
+              <span className="text-fg/60">a real problem, a team that moves fast, and room to do it right.</span>
             </p>
             <a
               href={`mailto:${founder.email}?subject=${encodeURIComponent("A project you might find interesting")}`}
@@ -224,9 +225,9 @@ export default function HomePage() {
         {/* How I work */}
         <Section id="principles" n="04" label="How I work" headingId="principles-heading">
           <h2 id="principles-heading" className="heading">
-            How I <span className="text-accent">work.</span>
+            The rules I <span className="text-accent">don&apos;t break.</span>
           </h2>
-          <Stage n="04" label="Field" hint="The steady foundation" className="mt-8 h-[220px]" />
+          <Stage n="04" label="Spine" hint="Twists, never breaks" className="mt-8 h-[220px]" />
           <ol className="mt-8 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
             {principles.map((p, i) => (
               <li
@@ -238,22 +239,23 @@ export default function HomePage() {
               </li>
             ))}
           </ol>
-          <Caption className="mt-6">A steady field underneath everything else</Caption>
+          <Caption className="mt-6">A spine that twists under pressure but never snaps</Caption>
         </Section>
 
         {/* Contact */}
         <Section id="contact" n="05" label="Contact" headingId="contact-heading">
           <h2 id="contact-heading" className="heading">
-            Building something <span className="text-accent">interesting?</span>
+            Got something worth <span className="text-accent">building?</span>
           </h2>
           <p className="mt-6 text-lg leading-relaxed text-fg/60">
-            A project you need built, an AI idea you want pressure-tested, or just a good conversation about
-            what&apos;s next. Tell me what you&apos;re working on. Short emails are welcome.
+            A project, a half-baked AI idea, or an &ldquo;is this even possible?&rdquo; question. Send it over.
+            Short emails get the fastest replies.
           </p>
-          <Stage n="05" label="Open door" hint="Your move" className="mt-8 h-[240px]" />
+          <Stage n="05" label="Portal" hint="Your move" className="mt-8 h-[240px]" />
           <div className="mt-8 lg:mt-10">
             <CopyEmail email={founder.email} />
           </div>
+          <Caption className="mt-6">The door&apos;s open. Walk through.</Caption>
         </Section>
 
         <footer className="relative px-5 sm:px-8">
@@ -310,7 +312,7 @@ function Caption({ children, className = "" }: { children: React.ReactNode; clas
   );
 }
 
-/** Mobile/tablet frame the 3D scene docks into, so particles never sit behind text. Hidden on desktop. */
+/** Mobile/tablet frame the 3D scene docks into, so the shape never sits behind text. Hidden on desktop. */
 function Stage({ n, label, hint, className = "" }: { n: string; label: string; hint: string; className?: string }) {
   return (
     <div data-stage aria-hidden="true" className={`stage lg:hidden ${className}`}>

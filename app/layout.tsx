@@ -25,7 +25,7 @@ const siteUrl = founder.website;
 const description =
   "Tunu Doley is a founder building an AI company, and takes on a few paid projects: AI features and agents, zero-to-one products, and technical direction.";
 const shareDescription =
-  "Founder building an AI company, and taking on a few interesting tech projects along the way.";
+  "Founder building AI that actually works, and helping a few teams ship theirs.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

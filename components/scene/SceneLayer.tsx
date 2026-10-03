@@ -4,7 +4,7 @@ import dynamic from "next/dynamic";
 import { useSyncExternalStore } from "react";
 import { useReducedMotion } from "../hooks";
 
-const ParticleScene = dynamic(() => import("./ParticleScene"), { ssr: false });
+const LiquidScene = dynamic(() => import("./LiquidScene"), { ssr: false });
 
 const smallQuery = "(max-width: 767px)";
 const subscribeSmall = (cb: () => void) => {
@@ -22,9 +22,10 @@ export function SceneLayer() {
     () => false,
   );
 
+  // Raymarching is per-pixel work, so cap resolution a little harder on phones.
   return (
     <div aria-hidden="true" className="scene-layer pointer-events-none fixed inset-0 z-0">
-      <ParticleScene calm={calm} count={small ? 6000 : 11000} />
+      <LiquidScene calm={calm} dpr={small ? 1.25 : 1.5} />
     </div>
   );
 }

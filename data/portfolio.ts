@@ -9,7 +9,7 @@ export const founder = {
     "Tunu Doley is a technology entrepreneur and founder building an AI company. Alongside it, Tunu takes on a small number of paid technology projects: AI features, zero-to-one products, and technical direction for teams that want to move fast without cutting corners.",
 
   shortDescription:
-    "Founder building an AI company, and taking on a few interesting tech projects along the way.",
+    "Founder building AI that actually works, and helping a few teams ship theirs.",
 
   status: "Building an AI company",
 
@@ -41,7 +41,7 @@ export const ventures = [
     category: "AI · Product · Early stage",
 
     description:
-      "Where most of my time goes. We're building AI that takes real work off people's plates, not another demo that looks great and breaks on day two. It's early and we're heads-down. More soon.",
+      "Most of my week. We're building AI that takes real work off real people's plates. The goal is something you'd miss if it broke, not something you screenshot once and forget. Early, heads-down, more soon.",
 
     status: "Building",
   },
@@ -52,7 +52,7 @@ export const ventures = [
     category: "AI features · Products · Technical direction",
 
     description:
-      "A few paid projects at a time, picked because the problem is genuinely interesting. Teams get a founder's urgency and an engineer's attention to detail, and I get to see problems I'd never meet otherwise.",
+      "A few paid projects at a time, only the ones I can't stop thinking about. You get a founder's urgency and an engineer's obsession with details. I get problems I'd never meet otherwise. Fair trade.",
 
     status: "Open, selectively",
   },
@@ -63,7 +63,7 @@ export const ventures = [
     category: "Prototypes · Tools · Ideas",
 
     description:
-      "Weekend builds, quick prototypes and tools I make for myself. Most stay small. The good ones quietly shape what I build next.",
+      "Weekend builds and tiny tools I make for myself. Most die quietly. The good ones sneak into everything else.",
 
     status: "Always on",
   },
@@ -72,25 +72,25 @@ export const ventures = [
 export const services = [
   {
     title: "AI features & agents",
-    body: "Adding AI to your product in a way that actually holds up: assistants, agents, automations and retrieval, built to work on real data rather than just in a demo.",
+    body: "Assistants, agents and automations that survive real users and messy data. Not just the happy path you saw in the demo.",
   },
   {
     title: "Zero-to-one products",
-    body: "From rough idea to something people can use. Tight scope, working software early, and a clear handover once it's live.",
+    body: "From napkin sketch to something people actually use. Tight scope, working software in weeks, not quarters.",
   },
   {
     title: "Technical direction",
-    body: "Architecture, build-vs-buy calls and AI strategy for founders who need a second brain that has shipped before.",
+    body: "Architecture, build-vs-buy and AI strategy from someone who has already made the expensive mistakes, so you don't have to.",
   },
 ];
 
 export const principles = [
-  "Start from first principles.",
-  "Build to understand.",
-  "Ship early. Learn fast.",
-  "AI should do real work.",
-  "Make complexity feel simple.",
-  "Small team, high standards.",
-  "Substance over noise.",
-  "Build for the long term.",
+  "Ship it, then polish it.",
+  "If it only works in the demo, it doesn't work.",
+  "Talk to users before writing code.",
+  "Simple beats clever.",
+  "Small team, high bar.",
+  "Own the outcome, not just the task.",
+  "Say no to most things.",
+  "Play the long game.",
 ];
