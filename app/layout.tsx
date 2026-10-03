@@ -29,24 +29,26 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Tunu Doley | Technology Entrepreneur & Founder",
+    default: "Tunu Doley | Founder Building in AI",
     template: "%s | Tunu Doley",
   },
 
   description:
-    "Tunu Doley is a technology entrepreneur, founder, and product builder creating software, digital products, and business technology solutions that help businesses grow.",
+    "Tunu Doley is a technology entrepreneur building an AI company, and takes on a few paid projects: AI features and agents, zero-to-one products, and technical direction.",
 
   applicationName: "Tunu Doley Portfolio",
 
   keywords: [
     "Tunu Doley",
-    "Tunu Doley entrepreneur",
+    "Tunu Doley founder",
+    "Tunu Doley AI",
+    "AI founder India",
+    "AI startup founder",
     "technology entrepreneur",
-    "startup founder",
-    "product builder",
-    "digital products",
-    "business technology",
-    "business growth systems",
+    "AI product engineer",
+    "AI agents",
+    "MVP development",
+    "technical advisor",
   ],
 
   authors: [
@@ -68,24 +70,24 @@ export const metadata: Metadata = {
     locale: "en_IN",
     url: siteUrl,
     siteName: "Tunu Doley",
-    title: "Tunu Doley | Technology Entrepreneur & Founder",
+    title: "Tunu Doley | Founder Building in AI",
     description:
-      "Explore the work, ventures, and ideas of Tunu Doley — a technology entrepreneur and product builder focused on business growth and digital innovation.",
+      "Founder building an AI company, and taking on a few interesting tech projects along the way.",
     images: [
       {
         url: "/og-image.jpg",
         width: 1200,
         height: 630,
-        alt: "Tunu Doley — Technology Entrepreneur and Founder",
+        alt: "Tunu Doley, founder building in AI",
       },
     ],
   },
 
   twitter: {
     card: "summary_large_image",
-    title: "Tunu Doley | Technology Entrepreneur & Founder",
+    title: "Tunu Doley | Founder Building in AI",
     description:
-      "Technology entrepreneur, founder, and product builder creating digital products and business growth solutions.",
+      "Founder building an AI company, and taking on a few interesting tech projects along the way.",
     images: ["/og-image.jpg"],
   },
 

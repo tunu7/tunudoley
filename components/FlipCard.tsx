@@ -35,7 +35,7 @@ export function FlipCard({
               TD
             </span>
             <span className="mt-4 block text-2xl font-medium tracking-tight">{name}</span>
-            <span className="block text-white/80">Founder &amp; tinkerer · {location}</span>
+            <span className="block text-white/80">Founder, building in AI · {location}</span>
           </span>
           <span className="flex items-center gap-2 text-sm text-white/90">
             <span className="inline-block animate-[spin_4s_linear_infinite]">↻</span>
@@ -47,9 +47,9 @@ export function FlipCard({
         <span className="flip-face flip-back flex flex-col justify-between rounded-[28px] bg-ink p-7 text-paper shadow-[0_30px_80px_-20px_rgba(0,0,0,0.5)]">
           <span className="text-xs uppercase tracking-[0.18em] text-paper/50">Quick facts</span>
           <span className="pop-z flex flex-col gap-3 text-base">
-            <Fact label="Currently" value="Building quietly" />
+            <Fact label="Currently" value="Building an AI company" />
+            <Fact label="Also" value="Taking on select projects" />
             <Fact label="Based in" value={location} />
-            <Fact label="Into" value="Systems, products, odd ideas" />
             <Fact label="Reach me" value={email} />
           </span>
           <span className="text-sm text-paper/50">↻ Tap to flip back</span>

@@ -1,17 +1,17 @@
 export const founder = {
   name: "Tunu Doley",
 
-  role: "Founder · Technology Entrepreneur · Product Builder",
+  role: "Founder · AI · Product Engineer",
 
-  headline: "Building quietly. Thinking long term.",
+  headline: "Building in AI, from India.",
 
   description:
-    "Tunu Doley is an independent founder and technology entrepreneur exploring the intersection of software, business, creativity, and human behaviour. He builds digital products, experiments with new ideas, and develops technology-driven ventures designed to create meaningful long-term value.",
+    "Tunu Doley is a technology entrepreneur and founder building an AI company. Alongside it, Tunu takes on a small number of paid technology projects: AI features, zero-to-one products, and technical direction for teams that want to move fast without cutting corners.",
 
   shortDescription:
-    "I build, experiment, and explore ideas at the intersection of technology, business, and creativity—turning curiosity into products, systems, and ventures.",
+    "Founder building an AI company, and taking on a few interesting tech projects along the way.",
 
-  status: "Building independently",
+  status: "Building an AI company",
 
   email: "tunudoley7@gmail.com",
 
@@ -22,89 +22,75 @@ export const founder = {
   keywords: [
     "Tunu Doley",
     "Tunu Doley founder",
-    "Tunu Doley entrepreneur",
+    "Tunu Doley AI",
+    "AI founder India",
+    "AI startup founder",
     "technology entrepreneur",
-    "independent founder",
-    "product builder",
-    "digital products",
-    "technology ventures",
-    "business systems",
-    "creative technology",
-    "startup exploration",
+    "AI product engineer",
+    "AI consultant",
+    "AI agents",
+    "MVP development",
+    "technical advisor",
   ],
 };
 
 export const ventures = [
   {
     id: "01",
-    name: "Business Technology",
-    category: "Systems · Infrastructure · Growth",
+    name: "My AI company",
+    category: "AI · Product · Early stage",
 
     description:
-      "Exploring how thoughtful technology can make businesses more capable, efficient, and adaptable. The focus is on building systems that simplify complexity and create room for better decisions and sustainable growth.",
+      "Where most of my time goes. We're building AI that takes real work off people's plates, not another demo that looks great and breaks on day two. It's early and we're heads-down. More soon.",
 
     status: "Building",
   },
 
   {
     id: "02",
-    name: "Digital Products",
-    category: "Ideas · Software · Experience",
+    name: "Client projects",
+    category: "AI features · Products · Technical direction",
 
     description:
-      "Turning interesting problems into useful digital products. From early concepts to working systems, the goal is to create experiences that feel simple, intentional, and genuinely valuable.",
+      "A few paid projects at a time, picked because the problem is genuinely interesting. Teams get a founder's urgency and an engineer's attention to detail, and I get to see problems I'd never meet otherwise.",
 
-    status: "Exploring",
+    status: "Open, selectively",
   },
 
   {
     id: "03",
-    name: "Private Venture",
-    category: "Long-term · Technology · Experimentation",
+    name: "Experiments",
+    category: "Prototypes · Tools · Ideas",
 
     description:
-      "A privately developed technology venture built around a long-term idea. Details remain private while the foundations, direction, and possibilities continue to take shape.",
+      "Weekend builds, quick prototypes and tools I make for myself. Most stay small. The good ones quietly shape what I build next.",
 
-    status: "Private",
+    status: "Always on",
   },
 ];
 
-export const products = [
+export const services = [
   {
-    name: "Digital Experiences",
-
-    description:
-      "Designing and building thoughtful web experiences that connect ideas, people, and possibilities through technology.",
-
-    category: "Product Thinking",
+    title: "AI features & agents",
+    body: "Adding AI to your product in a way that actually holds up: assistants, agents, automations and retrieval, built to work on real data rather than just in a demo.",
   },
-
   {
-    name: "Business Systems",
-
-    description:
-      "Exploring ways to turn scattered processes into clear, connected systems that help people work with more focus and less friction.",
-
-    category: "Systems Thinking",
+    title: "Zero-to-one products",
+    body: "From rough idea to something people can use. Tight scope, working software early, and a clear handover once it's live.",
   },
-
   {
-    name: "Technology Experiments",
-
-    description:
-      "Testing new tools, concepts, and workflows to understand what is possible—and what is actually worth building.",
-
-    category: "Continuous Learning",
+    title: "Technical direction",
+    body: "Architecture, build-vs-buy calls and AI strategy for founders who need a second brain that has shipped before.",
   },
 ];
 
 export const principles = [
-  "Start with first principles.",
+  "Start from first principles.",
   "Build to understand.",
+  "Ship early. Learn fast.",
+  "AI should do real work.",
   "Make complexity feel simple.",
-  "Stay curious longer than others.",
-  "Prefer substance over noise.",
-  "Think in systems, not shortcuts.",
-  "Ship, reflect, and improve.",
+  "Small team, high standards.",
+  "Substance over noise.",
   "Build for the long term.",
 ];

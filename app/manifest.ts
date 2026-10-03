@@ -2,13 +2,13 @@ import type { MetadataRoute } from "next";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "Tunu Doley | Technology Entrepreneur",
+    name: "Tunu Doley | Founder Building in AI",
     short_name: "Tunu Doley",
     description:
-      "The personal portfolio of Tunu Doley, a technology entrepreneur, founder, and product builder.",
+      "Tunu Doley is a founder building an AI company, and takes on a few interesting tech projects.",
     start_url: "/",
     display: "standalone",
-    background_color: "#f7f6f2",
+    background_color: "#f3efe7",
     theme_color: "#171717",
     icons: [
       {

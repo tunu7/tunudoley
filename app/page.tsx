@@ -1,4 +1,4 @@
-import { founder, ventures, principles } from "@/data/portfolio";
+import { founder, ventures, services, principles } from "@/data/portfolio";
 import { Nav } from "@/components/Nav";
 import { HeroCanvas, BlobCanvas } from "@/components/Scenes";
 import { FlipCard } from "@/components/FlipCard";
@@ -8,25 +8,9 @@ import { VentureStack } from "@/components/VentureStack";
 import { PrinciplesRing } from "@/components/PrinciplesRing";
 import { CopyEmail } from "@/components/CopyEmail";
 
-const focus = [
-  {
-    title: "Digital products",
-    body: "Turning interesting ideas into things people can actually use.",
-    Object: Cube,
-  },
-  {
-    title: "New ventures",
-    body: "Exploring opportunities at the intersection of technology and human needs.",
-    Object: Layers,
-  },
-  {
-    title: "Systems & experiments",
-    body: "Finding patterns, simplifying complexity, and testing better ways to do things.",
-    Object: Orbit,
-  },
-];
+const serviceObjects = [Orbit, Cube, Layers];
 
-const marquee = ["building", "experimenting", "shipping", "learning", "tinkering", "thinking long term"];
+const marquee = ["AI products", "agents", "zero to one", "shipping", "first principles", "long term"];
 
 export default function HomePage() {
   const personSchema = {
@@ -34,7 +18,7 @@ export default function HomePage() {
     "@type": "Person",
     name: founder.name,
     url: founder.website,
-    jobTitle: "Founder and Technology Entrepreneur",
+    jobTitle: "Founder, AI company",
     description: founder.description,
     email: `mailto:${founder.email}`,
     address: {
@@ -42,12 +26,12 @@ export default function HomePage() {
       addressCountry: "IN",
     },
     knowsAbout: [
+      "Artificial Intelligence",
+      "AI Agents",
       "Technology Entrepreneurship",
-      "Software Development",
-      "Digital Products",
       "Product Development",
-      "Business Technology",
-      "Creative Technology",
+      "Software Engineering",
+      "Technical Strategy",
     ],
   };
 
@@ -90,28 +74,29 @@ export default function HomePage() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
             </span>
-            Hey, I&apos;m {founder.name} — tech entrepreneur
+            Hey, I&apos;m {founder.name}. Founder, building in AI
           </p>
 
           <h1
             id="hero-heading"
-            className="max-w-4xl text-[clamp(3rem,9vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.055em]"
+            className="max-w-5xl text-[clamp(2.75rem,7vw,6rem)] font-medium leading-[0.95] tracking-[-0.05em]"
           >
-            Building ventures,
+            Building an AI company.
             <br />
-            following <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">curiosity.</span>
+            Open to <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">interesting</span> work.
           </h1>
 
           <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/65">
-            I build, experiment, and explore where technology, business, and creativity overlap.
+            Most of my time goes into my own company. The rest goes into a few paid projects I
+            can&apos;t stop thinking about.
           </p>
 
           <div className="pointer-events-auto mt-8 flex flex-wrap gap-3">
             <a href="#ventures" className="key-btn key-btn-dark h-12 px-6 text-sm">
               See what I&apos;m building ↗
             </a>
-            <a href="#about" className="key-btn h-12 px-6 text-sm">
-              A little about me
+            <a href="#work" className="key-btn h-12 px-6 text-sm">
+              Work with me
             </a>
           </div>
         </div>
@@ -152,48 +137,20 @@ export default function HomePage() {
               id="about-heading"
               className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
             >
-              Curious by nature.
+              Founder first.
               <br />
-              <Serif>Restless</Serif> by choice.
+              <Serif>Engineer</Serif> at heart.
             </h2>
             <div className="reveal-3d mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-ink/65">
               <p>
-                I&apos;m drawn to ideas that challenge the obvious and possibilities that haven&apos;t been
-                explored enough.
+                I like problems that look impossible on day one and obvious by day ninety. AI has made a
+                lot more of them worth taking on, so I&apos;m building a company around it.
               </p>
               <p>
-                I learn by building, think in systems, and look for simple ways to turn ambitious ideas into
-                something real.
+                I stay close to the code, get from idea to working product quickly, and care more about what
+                ships than what sounds good in a pitch deck. That&apos;s also what I bring to client work.
               </p>
             </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Focus */}
-      <section id="focus" aria-labelledby="focus-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
-        <div className="mx-auto max-w-6xl">
-          <SectionLabel n="02" label="Focus" />
-          <h2
-            id="focus-heading"
-            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-          >
-            A few things <Serif>on my mind.</Serif>
-          </h2>
-
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {focus.map(({ title, body, Object }, i) => (
-              <div key={title} className="reveal-3d">
-                <Tilt className="h-full rounded-[28px] border border-ink/8 bg-[#fffaf0]">
-                  <article className="flex h-full flex-col p-7">
-                    <Object className="pop-z mx-auto my-6 h-40 w-40" />
-                    <span className="pop-z-sm mt-4 font-mono text-xs text-ink/40">0{i + 1}</span>
-                    <h3 className="pop-z-sm mt-1 text-2xl font-medium tracking-tight">{title}</h3>
-                    <p className="mt-2 leading-relaxed text-ink/60">{body}</p>
-                  </article>
-                </Tilt>
-              </div>
-            ))}
           </div>
         </div>
       </section>
@@ -201,19 +158,69 @@ export default function HomePage() {
       {/* Ventures */}
       <section id="ventures" aria-labelledby="ventures-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
         <div className="mx-auto max-w-6xl">
-          <SectionLabel n="03" label="Ventures" />
+          <SectionLabel n="02" label="Building" />
           <h2
             id="ventures-heading"
             className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
           >
-            Things I&apos;m <Serif>building.</Serif>
+            What I&apos;m <Serif>building.</Serif>
           </h2>
           <p className="reveal-3d mt-5 max-w-md text-lg leading-relaxed text-ink/60">
-            A glimpse into the ideas, ventures, and experiments taking shape.
+            One company, a few client projects and a steady stream of experiments.
           </p>
 
           <div className="reveal-3d mt-14">
             <VentureStack ventures={ventures} />
+          </div>
+        </div>
+      </section>
+
+      {/* Work with me */}
+      <section id="work" aria-labelledby="work-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
+        <div className="mx-auto max-w-6xl">
+          <SectionLabel n="03" label="Work with me" />
+          <h2
+            id="work-heading"
+            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
+          >
+            Got a hard problem? <Serif>Good.</Serif>
+          </h2>
+          <p className="reveal-3d mt-5 max-w-lg text-lg leading-relaxed text-ink/60">
+            I take on a few paid projects at a time, and only ones I find genuinely interesting. If yours is
+            one of them, you get my full attention.
+          </p>
+
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {services.map(({ title, body }, i) => {
+              const Object = serviceObjects[i % serviceObjects.length];
+              return (
+                <div key={title} className="reveal-3d">
+                  <Tilt className="h-full rounded-[28px] border border-ink/8 bg-[#fffaf0]">
+                    <article className="flex h-full flex-col p-7">
+                      <Object className="pop-z mx-auto my-6 h-40 w-40" />
+                      <span className="pop-z-sm mt-4 font-mono text-xs text-ink/40">0{i + 1}</span>
+                      <h3 className="pop-z-sm mt-1 text-2xl font-medium tracking-tight">{title}</h3>
+                      <p className="mt-2 leading-relaxed text-ink/60">{body}</p>
+                    </article>
+                  </Tilt>
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="reveal-3d mt-12 flex flex-col items-start gap-5 rounded-[28px] border border-dashed border-ink/20 p-7 sm:flex-row sm:items-center sm:justify-between">
+            <p className="max-w-xl text-lg leading-relaxed">
+              <span className="font-medium">A good fit:</span>{" "}
+              <span className="text-ink/60">
+                a clear problem, a team that moves quickly, and room to do it properly.
+              </span>
+            </p>
+            <a
+              href={`mailto:${founder.email}?subject=${encodeURIComponent("A project you might find interesting")}`}
+              className="key-btn key-btn-dark h-12 shrink-0 px-6 text-sm"
+            >
+              Pitch me your project ↗
+            </a>
           </div>
         </div>
       </section>
@@ -230,7 +237,7 @@ export default function HomePage() {
             id="principles-heading"
             className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
           >
-            A few things <Serif>I believe.</Serif>
+            How I <Serif>work.</Serif>
           </h2>
         </div>
         <div className="reveal-3d mt-10">
@@ -251,12 +258,13 @@ export default function HomePage() {
               id="contact-heading"
               className="text-[clamp(2.75rem,7vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.055em]"
             >
-              Always open
+              Building something
               <br />
-              to the <Serif className="text-accent">unexpected.</Serif>
+              <Serif className="text-accent">interesting?</Serif>
             </h2>
             <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/60">
-              Ideas, conversations, collaborations, or simply something interesting. My inbox is friendly.
+              A project you need built, an AI idea you want pressure-tested, or just a good conversation about
+              what&apos;s next. Tell me what you&apos;re working on. Short emails are welcome.
             </p>
             <div className="mt-10">
               <CopyEmail email={founder.email} />
