@@ -1,34 +1,641 @@
 @import "tailwindcss";
 
-@keyframes floatCube {
-  0%,
-  100% {
-    transform: translateY(0) rotateZ(0deg);
+@theme inline {
+  --color-paper: #f3efe7;
+  --color-ink: #141414;
+  --color-accent: #ff5b29;
+  --color-sky: #9fb4ff;
+  --color-lime: #d9f36a;
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-serif: var(--font-instrument-serif);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+}
+
+::selection {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* Film grain, keeps the flat colours feeling warm. */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@layer components {
+  /* ---------- Keycap buttons ---------- */
+  .key-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    min-width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-ink);
+    background: #fffaf0;
+    color: var(--color-ink);
+    font-weight: 500;
+    box-shadow: 0 4px 0 0 var(--color-ink);
+    transform: translateY(0);
+    transition:
+      transform 0.15s ease,
+      box-shadow 0.15s ease,
+      background-color 0.2s ease;
+    cursor: pointer;
+    user-select: none;
+  }
+  .key-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 0 0 var(--color-ink);
+  }
+  .key-btn:active {
+    transform: translateY(3px);
+    box-shadow: 0 1px 0 0 var(--color-ink);
+  }
+  .key-btn:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+  }
+  .key-btn-dark {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    border-color: var(--color-ink);
+    box-shadow: 0 4px 0 0 var(--color-accent);
+  }
+  .key-btn-dark:hover {
+    box-shadow: 0 6px 0 0 var(--color-accent);
+  }
+  .key-btn-dark:active {
+    box-shadow: 0 1px 0 0 var(--color-accent);
+  }
+  .key-btn-accent {
+    background: var(--color-accent);
+    color: white;
+    border-color: var(--color-accent);
+    box-shadow: 0 5px 0 0 #b53a14;
+  }
+  .key-btn-accent:hover {
+    box-shadow: 0 7px 0 0 #b53a14;
+  }
+  .key-btn-accent:active {
+    box-shadow: 0 1px 0 0 #b53a14;
+  }
+  .key-btn-ghost {
+    background: transparent;
+    color: var(--color-paper);
+    border-color: rgb(243 239 231 / 0.3);
+    box-shadow: 0 5px 0 0 rgb(243 239 231 / 0.18);
+  }
+  .key-btn-ghost:hover {
+    box-shadow: 0 7px 0 0 rgb(243 239 231 / 0.18);
+  }
+  .key-btn-ghost:active {
+    box-shadow: 0 1px 0 0 rgb(243 239 231 / 0.18);
   }
 
-  50% {
-    transform: translateY(-12px) rotateZ(2deg);
+  /* ---------- Nav ---------- */
+  .nav-link {
+    transition:
+      background-color 0.25s ease,
+      transform 0.25s ease;
+  }
+  .nav-link:hover {
+    background: rgb(20 20 20 / 0.06);
+    transform: translateY(-1px);
+  }
+
+  .mobile-menu {
+    transform-origin: top center;
+    transition:
+      opacity 0.3s ease,
+      transform 0.4s cubic-bezier(0.2, 0.9, 0.25, 1),
+      visibility 0s linear 0.4s;
+  }
+  .mobile-menu[data-open="false"] {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: perspective(800px) rotateX(-30deg) translateY(-12px);
+  }
+  .mobile-menu[data-open="true"] {
+    transition-delay: 0s;
+  }
+  .mobile-link {
+    transition:
+      opacity 0.35s ease,
+      transform 0.35s ease,
+      background-color 0.2s ease;
+  }
+  .mobile-menu[data-open="false"] .mobile-link {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+
+  .logo-scene {
+    display: block;
+    width: 2.25rem;
+    height: 2.25rem;
+    perspective: 400px;
+  }
+  .logo-cube {
+    position: relative;
+    display: block;
+    width: 100%;
+    height: 100%;
+    transform-style: preserve-3d;
+    transform: rotateX(-12deg) rotateY(-24deg);
+    transition: transform 0.7s cubic-bezier(0.3, 1.4, 0.4, 1);
+  }
+  .logo-cube-link:hover .logo-cube,
+  .logo-cube-link:focus-visible .logo-cube {
+    transform: rotateX(-12deg) rotateY(-114deg);
+  }
+  .logo-face {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    border-radius: 8px;
+    border: 1.5px solid var(--color-ink);
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: -0.04em;
+  }
+  .logo-front {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    transform: translateZ(1.125rem);
+  }
+  .logo-back {
+    background: var(--color-ink);
+    color: var(--color-paper);
+    transform: rotateY(180deg) translateZ(1.125rem);
+  }
+  .logo-right {
+    background: var(--color-accent);
+    color: white;
+    transform: rotateY(90deg) translateZ(1.125rem);
+  }
+  .logo-left {
+    background: var(--color-sky);
+    transform: rotateY(-90deg) translateZ(1.125rem);
+  }
+  .logo-top {
+    background: var(--color-lime);
+    transform: rotateX(90deg) translateZ(1.125rem);
+  }
+  .logo-bottom {
+    background: var(--color-ink);
+    transform: rotateX(-90deg) translateZ(1.125rem);
+  }
+
+  /* ---------- Tilt cards ---------- */
+  .tilt {
+    position: relative;
+    transform: perspective(1000px) rotateX(var(--rx, 0deg)) rotateY(var(--ry, 0deg));
+    transform-style: preserve-3d;
+    transition: transform 0.6s cubic-bezier(0.2, 0.9, 0.25, 1);
+    will-change: transform;
+  }
+  .tilt:hover {
+    transition-duration: 0.15s;
+  }
+  .tilt > *,
+  .tilt > * > * {
+    transform-style: preserve-3d;
+  }
+  .tilt-glare {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    transform: translateZ(1px);
+    background: radial-gradient(
+      circle at var(--gx, 50%) var(--gy, 50%),
+      rgb(255 255 255 / 0.45),
+      transparent 55%
+    );
+    mix-blend-mode: soft-light;
+    transition: opacity 0.4s ease;
+  }
+  .tilt:hover .tilt-glare {
+    opacity: 1;
+  }
+  .pop-z {
+    transform: translateZ(50px);
+  }
+  .pop-z-sm {
+    transform: translateZ(25px);
+  }
+
+  /* ---------- Flip card ---------- */
+  .flip-card {
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.9s cubic-bezier(0.3, 1.3, 0.4, 1);
+  }
+  .flip-card[data-flipped="true"] {
+    transform: rotateY(180deg);
+  }
+  .flip-card:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 6px;
+  }
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+
+  /* ---------- Pure CSS 3D objects ---------- */
+  .css-scene {
+    display: grid;
+    place-items: center;
+    perspective: 700px;
+  }
+
+  .cube {
+    position: relative;
+    width: 5rem;
+    height: 5rem;
+    transform-style: preserve-3d;
+    animation: cube-spin 14s linear infinite;
+  }
+  .cube-face {
+    position: absolute;
+    inset: 0;
+    border: 1.5px solid var(--color-ink);
+    border-radius: 14px;
+  }
+  .cube-front {
+    background: var(--color-accent);
+    transform: translateZ(2.5rem);
+  }
+  .cube-back {
+    background: var(--color-accent);
+    transform: rotateY(180deg) translateZ(2.5rem);
+  }
+  .cube-right {
+    background: #fffaf0;
+    transform: rotateY(90deg) translateZ(2.5rem);
+  }
+  .cube-left {
+    background: #fffaf0;
+    transform: rotateY(-90deg) translateZ(2.5rem);
+  }
+  .cube-top {
+    background: var(--color-sky);
+    transform: rotateX(90deg) translateZ(2.5rem);
+  }
+  .cube-bottom {
+    background: var(--color-ink);
+    transform: rotateX(-90deg) translateZ(2.5rem);
+  }
+
+  .layers {
+    position: relative;
+    width: 5.5rem;
+    height: 5.5rem;
+    transform-style: preserve-3d;
+    animation: layers-spin 18s linear infinite;
+  }
+  .layer {
+    position: absolute;
+    inset: 0;
+    border-radius: 14px;
+    border: 1.5px solid var(--color-ink);
+    transition: transform 0.6s cubic-bezier(0.3, 1.4, 0.4, 1);
+  }
+  .layer:nth-child(1) {
+    transform: translateZ(0);
+  }
+  .layer:nth-child(2) {
+    transform: translateZ(22px);
+  }
+  .layer:nth-child(3) {
+    transform: translateZ(44px);
+  }
+  .tilt:hover .layer:nth-child(2) {
+    transform: translateZ(42px);
+  }
+  .tilt:hover .layer:nth-child(3) {
+    transform: translateZ(84px);
+  }
+
+  .orbit {
+    position: relative;
+    width: 8rem;
+    height: 8rem;
+    transform-style: preserve-3d;
+  }
+  .orbit-core {
+    position: absolute;
+    inset: 32%;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-ink);
+    background: radial-gradient(circle at 35% 30%, #fff 0%, var(--color-lime) 35%, #9fbf2a 100%);
+  }
+  .orbit-ring {
+    position: absolute;
+    inset: 0;
+    border-radius: 999px;
+    border: 1.5px solid var(--color-ink);
+    animation: ring-a 6s linear infinite;
+  }
+  .orbit-ring::after {
+    content: "";
+    position: absolute;
+    top: -7px;
+    left: calc(50% - 7px);
+    width: 14px;
+    height: 14px;
+    border-radius: 999px;
+    background: var(--color-accent);
+    border: 1.5px solid var(--color-ink);
+  }
+  .orbit-ring-2 {
+    inset: 8%;
+    animation-name: ring-b;
+    animation-duration: 8s;
+  }
+  .orbit-ring-2::after {
+    background: var(--color-sky);
+  }
+  .orbit-ring-3 {
+    inset: 16%;
+    animation-name: ring-c;
+    animation-duration: 10s;
+  }
+  .orbit-ring-3::after {
+    background: #fffaf0;
+  }
+
+  /* ---------- Venture deck ---------- */
+  .deck {
+    perspective: 1400px;
+    perspective-origin: 50% 0%;
+    transform-style: preserve-3d;
+  }
+  .deck-card {
+    transform-style: preserve-3d;
+    transition:
+      transform 0.65s cubic-bezier(0.2, 0.9, 0.25, 1),
+      opacity 0.45s ease;
+    will-change: transform;
+  }
+
+  /* ---------- Principles ring ---------- */
+  .ring-stage {
+    --w: 190px;
+    --h: 240px;
+    --r: calc(var(--w) * 1.32);
+    perspective: 1000px;
+  }
+  @media (min-width: 640px) {
+    .ring-stage {
+      --w: 240px;
+      --h: 290px;
+    }
+  }
+  .ring {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: var(--w);
+    height: var(--h);
+    margin-left: calc(var(--w) / -2);
+    margin-top: calc(var(--h) / -2);
+    transform-style: preserve-3d;
+  }
+  .ring-panel {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1.5rem;
+    border-radius: 24px;
+    border: 1.5px solid var(--color-ink);
+    background: #fffaf0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    transition:
+      background-color 0.4s ease,
+      color 0.4s ease;
+  }
+  .ring-panel.is-active {
+    background: var(--color-ink);
+    color: var(--color-paper);
+  }
+
+  /* ---------- Hero ---------- */
+  .hero-grid {
+    position: absolute;
+    left: -50%;
+    right: -50%;
+    bottom: -5%;
+    height: 65%;
+    background-image:
+      linear-gradient(rgb(20 20 20 / 0.08) 1px, transparent 1px),
+      linear-gradient(90deg, rgb(20 20 20 / 0.08) 1px, transparent 1px);
+    background-size: 64px 64px;
+    transform: perspective(500px) rotateX(68deg);
+    transform-origin: bottom center;
+    mask-image: linear-gradient(to top, black 10%, transparent 90%);
+    animation: grid-move 4s linear infinite;
+  }
+
+  /* ---------- Marquee band ---------- */
+  .band-stage {
+    perspective: 900px;
+  }
+  .band {
+    padding: 1.1rem 0;
+    overflow: hidden;
+    transform: rotateX(16deg) rotateZ(-3deg) scale(1.05);
+    box-shadow: 0 30px 60px -20px rgb(0 0 0 / 0.35);
+  }
+  .band-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 36s linear infinite;
+  }
+
+  .scene-fade canvas {
+    animation: fade-in 1.4s ease both;
   }
 }
 
-@keyframes floatSmall {
-  0%,
-  100% {
-    transform: translateY(0);
+/* ---------- Scroll-driven 3D (progressive enhancement) ---------- */
+@supports (animation-timeline: view()) {
+  .reveal-3d {
+    transform-origin: 50% 100%;
+    animation: reveal-3d linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 28%;
   }
 
-  50% {
-    transform: translateY(-16px);
+  .hero-exit {
+    transform-origin: 50% 100%;
+    animation: hero-exit linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0px 90vh;
+  }
+
+  .band {
+    animation: band-3d linear both;
+    animation-timeline: view();
+  }
+
+  .contact-lift {
+    transform-origin: 50% 0%;
+    animation: contact-lift linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 90%;
+  }
+}
+
+@keyframes reveal-3d {
+  from {
+    opacity: 0;
+    transform: perspective(1200px) translateY(70px) rotateX(-28deg) scale(0.94);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes hero-exit {
+  to {
+    opacity: 0;
+    transform: perspective(1000px) translateZ(-260px) rotateX(22deg);
+  }
+}
+
+@keyframes band-3d {
+  from {
+    transform: rotateX(45deg) rotateZ(-7deg) scale(1.05);
+  }
+  to {
+    transform: rotateX(-25deg) rotateZ(1deg) scale(1.05);
+  }
+}
+
+@keyframes contact-lift {
+  from {
+    transform: perspective(1400px) rotateX(16deg) translateY(60px) scale(0.93);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes cube-spin {
+  from {
+    transform: rotateX(-24deg) rotateY(0deg);
+  }
+  to {
+    transform: rotateX(-24deg) rotateY(360deg);
+  }
+}
+
+@keyframes layers-spin {
+  from {
+    transform: rotateX(58deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(58deg) rotateZ(360deg);
+  }
+}
+
+@keyframes ring-a {
+  from {
+    transform: rotateX(72deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(72deg) rotateZ(360deg);
+  }
+}
+
+@keyframes ring-b {
+  from {
+    transform: rotateY(68deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateY(68deg) rotateZ(-360deg);
+  }
+}
+
+@keyframes ring-c {
+  from {
+    transform: rotateX(50deg) rotateY(-45deg) rotateZ(0deg);
+  }
+  to {
+    transform: rotateX(50deg) rotateY(-45deg) rotateZ(360deg);
+  }
+}
+
+@keyframes grid-move {
+  to {
+    background-position: 0 64px;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .reveal-3d,
+  .hero-exit,
+  .band,
+  .contact-lift,
+  .hero-grid,
+  .band-track,
+  .cube,
+  .layers,
+  .orbit-ring {
+    animation: none !important;
+  }
+
   *,
   *::before,
   *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
   }
 }

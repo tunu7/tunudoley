@@ -1,12 +1,34 @@
-
-"use client";
-
-import { useState } from "react";
 import { founder, ventures, principles } from "@/data/portfolio";
+import { Nav } from "@/components/Nav";
+import { HeroCanvas, BlobCanvas } from "@/components/Scenes";
+import { FlipCard } from "@/components/FlipCard";
+import { Tilt } from "@/components/Tilt";
+import { Cube, Layers, Orbit } from "@/components/Objects3D";
+import { VentureStack } from "@/components/VentureStack";
+import { PrinciplesRing } from "@/components/PrinciplesRing";
+import { CopyEmail } from "@/components/CopyEmail";
+
+const focus = [
+  {
+    title: "Digital products",
+    body: "Turning interesting ideas into things people can actually use.",
+    Object: Cube,
+  },
+  {
+    title: "New ventures",
+    body: "Exploring opportunities at the intersection of technology and human needs.",
+    Object: Layers,
+  },
+  {
+    title: "Systems & experiments",
+    body: "Finding patterns, simplifying complexity, and testing better ways to do things.",
+    Object: Orbit,
+  },
+];
+
+const marquee = ["building", "experimenting", "shipping", "learning", "tinkering", "thinking long term"];
 
 export default function HomePage() {
-  const [menuOpen, setMenuOpen] = useState(false);
-
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
@@ -41,375 +63,178 @@ export default function HomePage() {
     description: founder.description,
   };
 
-  const closeMenu = () => setMenuOpen(false);
-
   return (
-    <main
-      id="top"
-      className="min-h-screen bg-[#f7f6f2] text-[#171717]"
-    >
-      {/* Structured data */}
+    <main id="top" className="relative min-h-screen overflow-x-clip bg-paper text-ink">
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(personSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
       />
-
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify(organizationSchema),
-        }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
-      {/* Floating Navbar */}
-<header className="fixed inset-x-0 top-0 z-50 px-4 pt-4 sm:px-6">
-  <div className="mx-auto flex max-w-5xl items-center justify-between rounded-full border border-black/8 bg-[#f7f6f2]/75 px-4 py-3 shadow-[0_8px_40px_rgba(0,0,0,0.04)] backdrop-blur-xl transition-all duration-500 sm:px-5">
-    {/* Logo */}
-    <a
-      href="#top"
-      aria-label="Tunu Doley home"
-      className="text-lg font-semibold tracking-[-0.08em] transition-opacity hover:opacity-50"
-    >
-      TD.
-    </a>
-
-    {/* Desktop Navigation */}
-    <nav
-      aria-label="Main navigation"
-      className="hidden items-center gap-1 rounded-full bg-black/[0.035] p-1 text-sm md:flex"
-    >
-      <a
-        href="#about"
-        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
-      >
-        About
-      </a>
-
-      <a
-        href="#work"
-        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
-      >
-        Focus
-      </a>
-
-      <a
-        href="#ventures"
-        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
-      >
-        Ventures
-      </a>
-
-      <a
-        href="#contact"
-        className="rounded-full px-4 py-2 transition-all duration-300 hover:bg-white hover:shadow-sm"
-      >
-        Contact
-      </a>
-    </nav>
-
-    {/* Right Side */}
-    <div className="flex items-center gap-3">
-      <a
-        href="#contact"
-        className="hidden rounded-full bg-black px-4 py-2 text-xs text-white transition-all duration-300 hover:bg-black/75 sm:block"
-      >
-        Say hello ↗
-      </a>
-
-      <button
-        type="button"
-        onClick={() => setMenuOpen(!menuOpen)}
-        className="rounded-full border border-black/10 px-3 py-2 text-xs transition-all duration-300 hover:bg-black hover:text-white md:hidden"
-        aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
-        aria-expanded={menuOpen}
-        aria-controls="mobile-navigation"
-      >
-        {menuOpen ? "Close" : "Menu"}
-      </button>
-    </div>
-  </div>
-
-  {/* Mobile Navigation */}
-  {menuOpen && (
-    <nav
-      id="mobile-navigation"
-      aria-label="Mobile navigation"
-      className="mx-auto mt-2 max-w-5xl rounded-3xl border border-black/8 bg-[#f7f6f2]/90 p-5 shadow-[0_8px_40px_rgba(0,0,0,0.05)] backdrop-blur-xl md:hidden"
-    >
-      <div className="flex flex-col gap-1">
-        <a
-          href="#about"
-          onClick={closeMenu}
-          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
-        >
-          About
-        </a>
-
-        <a
-          href="#work"
-          onClick={closeMenu}
-          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
-        >
-          Focus
-        </a>
-
-        <a
-          href="#ventures"
-          onClick={closeMenu}
-          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
-        >
-          Ventures
-        </a>
-
-        <a
-          href="#contact"
-          onClick={closeMenu}
-          className="rounded-2xl px-4 py-3 text-lg transition-colors hover:bg-black/4"
-        >
-          Contact
-        </a>
-      </div>
-    </nav>
-  )}
-</header>
+      <Nav />
 
       {/* Hero */}
       <section
         aria-labelledby="hero-heading"
-        className="mx-auto max-w-7xl px-6 pb-28 pt-24 lg:px-10 lg:pb-40 lg:pt-36"
+        className="relative flex h-[100svh] min-h-[640px] items-end overflow-hidden"
       >
-        <div className="mb-8 flex items-center gap-3">
-  <span className="h-px w-8 bg-black/40" />
+        <div className="hero-grid" aria-hidden="true" />
+        <HeroCanvas className="absolute inset-0" />
 
-  <span className="rounded-full border border-black/15 px-2.5 py-1 text-[10px] uppercase tracking-[0.16em] text-black/45">
-    Tech Entrepreneur
-  </span>
-</div>
-
-        <h1
-          id="hero-heading"
-          className="max-w-5xl text-5xl font-medium leading-[0.98] tracking-[-0.07em] sm:text-6xl lg:text-8xl"
-        >
-          Building ventures.
-          <br />
-          <span className="text-black/40">Following curiosity.</span>
-        </h1>
-
-        <div className="mt-10 max-w-2xl">
-          <p className="text-xl leading-relaxed text-black/65 md:text-2xl">
-            I&apos;m {founder.name}. I build, experiment, and explore the
-            intersection of technology, business, and creativity.
+        <div className="hero-exit pointer-events-none relative mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-20">
+          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/70 px-3 py-1.5 text-xs text-ink/70 backdrop-blur">
+            <span className="relative flex size-2">
+              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
+              <span className="relative inline-flex size-2 rounded-full bg-accent" />
+            </span>
+            Hey, I&apos;m {founder.name} — tech entrepreneur
           </p>
+
+          <h1
+            id="hero-heading"
+            className="max-w-4xl text-[clamp(3rem,9vw,7.5rem)] font-medium leading-[0.92] tracking-[-0.055em]"
+          >
+            Building ventures,
+            <br />
+            following <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">curiosity.</span>
+          </h1>
+
+          <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/65">
+            I build, experiment, and explore where technology, business, and creativity overlap.
+          </p>
+
+          <div className="pointer-events-auto mt-8 flex flex-wrap gap-3">
+            <a href="#ventures" className="key-btn key-btn-dark h-12 px-6 text-sm">
+              See what I&apos;m building ↗
+            </a>
+            <a href="#about" className="key-btn h-12 px-6 text-sm">
+              A little about me
+            </a>
+          </div>
         </div>
 
-        <div className="mt-10 flex flex-wrap gap-4">
-          <a
-            href="#ventures"
-            className="rounded-full bg-black px-6 py-3 text-sm text-white transition hover:opacity-80"
-          >
-            See what I&apos;m building ↗
-          </a>
-
-          <a
-            href="#about"
-            className="rounded-full border border-black/20 px-6 py-3 text-sm transition hover:bg-black hover:text-white"
-          >
-            A little about me
-          </a>
-        </div>
+        <p className="pointer-events-none absolute bottom-6 right-6 hidden items-center gap-2 text-xs text-ink/50 md:flex">
+          <span className="inline-block animate-bounce">✦</span> psst — grab a shape and throw it
+        </p>
       </section>
 
-      {/* About */}
-      <section
-        id="about"
-        aria-labelledby="about-heading"
-        className="border-t border-black/10 bg-[#eeeae3] px-6 py-24 lg:px-10 lg:py-32"
-      >
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.8fr_1.2fr]">
-          <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            01 / About
-          </p>
+      {/* Marquee band */}
+      <div className="band-stage relative z-10 -my-6 py-10" aria-hidden="true">
+        <div className="band bg-ink text-paper">
+          <div className="band-track">
+            {[0, 1].map((k) => (
+              <span key={k} className="flex shrink-0 items-center">
+                {marquee.map((w) => (
+                  <span key={w} className="flex items-center px-6 font-serif text-3xl italic sm:text-4xl">
+                    {w}
+                    <span className="ml-12 text-accent not-italic">✺</span>
+                  </span>
+                ))}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
 
-          <div className="max-w-2xl">
+      {/* About */}
+      <section id="about" aria-labelledby="about-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
+        <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-[0.9fr_1.1fr]">
+          <div className="reveal-3d order-2 md:order-1">
+            <FlipCard name={founder.name} location={founder.location} email={founder.email} />
+          </div>
+
+          <div className="order-1 md:order-2">
+            <SectionLabel n="01" label="About" />
             <h2
               id="about-heading"
-              className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
+              className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
             >
               Curious by nature.
               <br />
-              Restless by choice.
+              <Serif>Restless</Serif> by choice.
             </h2>
-
-            <p className="mt-8 text-lg leading-relaxed text-black/60">
-              I&apos;m drawn to ideas that challenge the obvious and
-              possibilities that haven&apos;t been explored enough.
-            </p>
-
-            <p className="mt-5 text-lg leading-relaxed text-black/60">
-              I learn by building, think in systems, and look for simple
-              ways to turn ambitious ideas into something real.
-            </p>
+            <div className="reveal-3d mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-ink/65">
+              <p>
+                I&apos;m drawn to ideas that challenge the obvious and possibilities that haven&apos;t been
+                explored enough.
+              </p>
+              <p>
+                I learn by building, think in systems, and look for simple ways to turn ambitious ideas into
+                something real.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
       {/* Focus */}
-      <section
-        id="work"
-        aria-labelledby="work-heading"
-        className="mx-auto max-w-7xl px-6 py-24 lg:px-10 lg:py-32"
-      >
-        <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-          <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            02 / Focus
-          </p>
+      <section id="focus" aria-labelledby="focus-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
+        <div className="mx-auto max-w-6xl">
+          <SectionLabel n="02" label="Focus" />
+          <h2
+            id="focus-heading"
+            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
+          >
+            A few things <Serif>on my mind.</Serif>
+          </h2>
 
-          <div>
-            <h2
-              id="work-heading"
-              className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
-            >
-              A few things
-              <br />
-              on my mind.
-            </h2>
-
-            <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
-              <article className="py-6">
-                <h3 className="text-xl font-medium">
-                  Digital products
-                </h3>
-
-                <p className="mt-2 text-black/60">
-                  Turning interesting ideas into things people can
-                  actually use.
-                </p>
-              </article>
-
-              <article className="py-6">
-                <h3 className="text-xl font-medium">
-                  New ventures
-                </h3>
-
-                <p className="mt-2 text-black/60">
-                  Exploring opportunities at the intersection of technology
-                  and human needs.
-                </p>
-              </article>
-
-              <article className="py-6">
-                <h3 className="text-xl font-medium">
-                  Systems and experiments
-                </h3>
-
-                <p className="mt-2 text-black/60">
-                  Finding patterns, simplifying complexity, and testing
-                  better ways to do things.
-                </p>
-              </article>
-            </div>
+          <div className="mt-14 grid gap-5 md:grid-cols-3">
+            {focus.map(({ title, body, Object }, i) => (
+              <div key={title} className="reveal-3d">
+                <Tilt className="h-full rounded-[28px] border border-ink/8 bg-[#fffaf0]">
+                  <article className="flex h-full flex-col p-7">
+                    <Object className="pop-z mx-auto my-6 h-40 w-40" />
+                    <span className="pop-z-sm mt-4 font-mono text-xs text-ink/40">0{i + 1}</span>
+                    <h3 className="pop-z-sm mt-1 text-2xl font-medium tracking-tight">{title}</h3>
+                    <p className="mt-2 leading-relaxed text-ink/60">{body}</p>
+                  </article>
+                </Tilt>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* Ventures */}
-      <section
-        id="ventures"
-        aria-labelledby="ventures-heading"
-        className="border-t border-black/10 bg-[#eeeae3] px-6 py-24 lg:px-10 lg:py-32"
-      >
-        <div className="mx-auto max-w-7xl">
-          <div className="grid gap-10 md:grid-cols-[0.8fr_1.2fr]">
-            <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-              03 / Ventures
-            </p>
+      <section id="ventures" aria-labelledby="ventures-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
+        <div className="mx-auto max-w-6xl">
+          <SectionLabel n="03" label="Ventures" />
+          <h2
+            id="ventures-heading"
+            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
+          >
+            Things I&apos;m <Serif>building.</Serif>
+          </h2>
+          <p className="reveal-3d mt-5 max-w-md text-lg leading-relaxed text-ink/60">
+            A glimpse into the ideas, ventures, and experiments taking shape.
+          </p>
 
-            <div>
-              <h2
-                id="ventures-heading"
-                className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
-              >
-                Things I&apos;m
-                <br />
-                building.
-              </h2>
-
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-black/60">
-                A glimpse into the ideas, ventures, and experiments taking
-                shape.
-              </p>
-
-              <div className="mt-12 divide-y divide-black/15 border-y border-black/15">
-                {ventures.map((venture) => (
-                  <article key={venture.id} className="py-6">
-                    <div className="flex flex-wrap items-start justify-between gap-4">
-                      <div>
-                        <p className="mb-2 text-sm text-black/40">
-                          {venture.id}
-                        </p>
-
-                        <h3 className="text-xl font-medium">
-                          {venture.name}
-                        </h3>
-
-                        <p className="mt-1 text-sm text-black/50">
-                          {venture.category}
-                        </p>
-                      </div>
-
-                      <span className="rounded-full border border-black/15 px-3 py-1 text-xs">
-                        {venture.status}
-                      </span>
-                    </div>
-
-                    <p className="mt-4 max-w-xl leading-relaxed text-black/60">
-                      {venture.description}
-                    </p>
-                  </article>
-                ))}
-              </div>
-            </div>
+          <div className="reveal-3d mt-14">
+            <VentureStack ventures={ventures} />
           </div>
         </div>
       </section>
 
       {/* Principles */}
       <section
+        id="principles"
         aria-labelledby="principles-heading"
-        className="border-t border-black/10 bg-[#eeeae3] px-6 py-24 lg:px-10 lg:py-32"
+        className="scroll-mt-24 overflow-hidden px-5 py-28 sm:px-8 lg:py-36"
       >
-        <div className="mx-auto grid max-w-7xl gap-10 md:grid-cols-[0.8fr_1.2fr]">
-          <p className="text-sm uppercase tracking-[0.2em] text-black/50">
-            05 / Principles
-          </p>
-
-          <div>
-            <h2
-              id="principles-heading"
-              className="text-4xl font-medium leading-tight tracking-tighter md:text-6xl"
-            >
-              A few things
-              <br />
-              I believe.
-            </h2>
-
-            <ul className="mt-12 divide-y divide-black/15 border-y border-black/15">
-              {principles.map((principle, index) => (
-                <li
-                  key={principle}
-                  className="flex gap-6 py-5 text-lg"
-                >
-                  <span className="text-sm text-black/40">
-                    {String(index + 1).padStart(2, "0")}
-                  </span>
-
-                  <span>{principle}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
+        <div className="mx-auto max-w-6xl">
+          <SectionLabel n="04" label="Principles" />
+          <h2
+            id="principles-heading"
+            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
+          >
+            A few things <Serif>I believe.</Serif>
+          </h2>
+        </div>
+        <div className="reveal-3d mt-10">
+          <PrinciplesRing principles={principles} />
         </div>
       </section>
 
@@ -417,48 +242,60 @@ export default function HomePage() {
       <section
         id="contact"
         aria-labelledby="contact-heading"
-        className="border-t border-black/10 bg-black px-6 py-24 text-white lg:px-10 lg:py-32"
+        className="contact-lift relative scroll-mt-0 overflow-hidden rounded-t-[40px] bg-ink px-5 pt-24 text-paper sm:px-8 lg:pt-32"
       >
-        <div className="mx-auto max-w-7xl">
-          <p className="mb-8 text-sm uppercase tracking-[0.2em] text-white/40">
-            06 / Contact
-          </p>
+        <div className="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[1.1fr_0.9fr]">
+          <div className="relative z-10">
+            <SectionLabel n="05" label="Contact" dark />
+            <h2
+              id="contact-heading"
+              className="text-[clamp(2.75rem,7vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.055em]"
+            >
+              Always open
+              <br />
+              to the <Serif className="text-accent">unexpected.</Serif>
+            </h2>
+            <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/60">
+              Ideas, conversations, collaborations, or simply something interesting. My inbox is friendly.
+            </p>
+            <div className="mt-10">
+              <CopyEmail email={founder.email} />
+            </div>
+          </div>
 
-          <h2
-            id="contact-heading"
-            className="max-w-4xl text-5xl font-medium leading-[0.98] tracking-[-0.07em] md:text-7xl"
-          >
-            Always open
-            <br />
-            to the unexpected.
-          </h2>
-
-          <p className="mt-8 max-w-xl text-lg leading-relaxed text-white/60">
-            Ideas, conversations, collaborations, or simply something
-            interesting.
-          </p>
-
-          <a
-            href={`mailto:${founder.email}`}
-            className="mt-10 inline-block border-b border-white/40 pb-2 text-lg transition hover:border-white"
-          >
-            {founder.email} ↗
-          </a>
+          <div className="relative -mx-5 h-[360px] sm:mx-0 md:h-[520px]">
+            <BlobCanvas className="absolute inset-0" />
+            <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-paper/40">
+              poke it
+            </p>
+          </div>
         </div>
-      </section>
 
-      {/* Footer */}
-      <footer className="border-t border-black/10 px-6 py-8 lg:px-10">
-        <div className="mx-auto flex max-w-7xl flex-col justify-between gap-3 text-sm text-black/50 md:flex-row">
+        <footer className="mx-auto mt-16 flex max-w-6xl flex-col justify-between gap-2 border-t border-paper/10 py-8 text-sm text-paper/45 md:flex-row">
           <p>
             © {new Date().getFullYear()} {founder.name}
           </p>
-
-          <p>
-            Building quietly. Thinking long term.
-          </p>
-        </div>
-      </footer>
+          <p>{founder.headline}</p>
+        </footer>
+      </section>
     </main>
   );
+}
+
+function SectionLabel({ n, label, dark = false }: { n: string; label: string; dark?: boolean }) {
+  return (
+    <p
+      className={`mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] ${
+        dark ? "border-paper/15 text-paper/50" : "border-ink/10 text-ink/50"
+      }`}
+    >
+      <span>{n}</span>
+      <span className="opacity-40">/</span>
+      <span>{label}</span>
+    </p>
+  );
+}
+
+function Serif({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return <span className={`font-serif font-normal italic tracking-[-0.02em] ${className}`}>{children}</span>;
 }
