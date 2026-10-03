@@ -131,6 +131,46 @@ body {
     color: rgb(244 244 245 / 0.7);
   }
 
+  /* Mobile 3D frame: transparent so the fixed canvas shows through. */
+  .stage {
+    position: relative;
+    border-radius: 1.25rem;
+    border: 1px solid var(--color-line);
+    background:
+      radial-gradient(circle at 50% 50%, rgb(198 255 61 / 0.06), transparent 65%),
+      linear-gradient(rgb(255 255 255 / 0.03) 1px, transparent 1px) 0 0 / 100% 32px;
+  }
+  .stage::before,
+  .stage::after {
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-color: var(--color-accent);
+    border-style: solid;
+    opacity: 0.6;
+  }
+  .stage::before {
+    top: -1px;
+    left: -1px;
+    border-width: 1px 0 0 1px;
+    border-top-left-radius: 1.25rem;
+  }
+  .stage::after {
+    bottom: -1px;
+    right: -1px;
+    border-width: 0 1px 1px 0;
+    border-bottom-right-radius: 1.25rem;
+  }
+  .stage-tag {
+    position: absolute;
+    font-family: var(--font-geist-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: rgb(244 244 245 / 0.45);
+  }
+
   .mobile-menu {
     transform-origin: top center;
     transition:

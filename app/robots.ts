@@ -1,13 +1,13 @@
 import type { MetadataRoute } from "next";
+import { founder } from "@/data/portfolio";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://tunudoley.in";
-
   return {
     rules: {
       userAgent: "*",
       allow: "/",
     },
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: `${founder.website}/sitemap.xml`,
+    host: founder.website,
   };
 }

@@ -117,11 +117,29 @@ function readScrollProgress(sections: HTMLElement[]) {
   return mid < (sections[0]?.getBoundingClientRect().top ?? 0) ? 0 : sections.length - 1;
 }
 
+/** The stage frame closest to the viewport centre, if any is on screen. */
+function nearestStage(stages: HTMLElement[]) {
+  const mid = window.innerHeight / 2;
+  let best: { index: number; rect: DOMRect } | null = null;
+  let bestDist = Infinity;
+  stages.forEach((el, index) => {
+    const rect = el.getBoundingClientRect();
+    if (rect.height === 0 || rect.bottom < 0 || rect.top > window.innerHeight) return;
+    const dist = Math.abs(rect.top + rect.height / 2 - mid);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = { index, rect };
+    }
+  });
+  return best as { index: number; rect: DOMRect } | null;
+}
+
 function Particles({ count, calm }: { count: number; calm: boolean }) {
   const group = useRef<THREE.Group>(null);
   const points = useRef<THREE.Points>(null);
   const { gl } = useThree();
   const sections = useRef<HTMLElement[]>([]);
+  const stages = useRef<HTMLElement[]>([]);
   const motion = useRef<Motion>({
     progress: 0,
     spin: 0,
@@ -170,6 +188,7 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
 
   useEffect(() => {
     sections.current = Array.from(document.querySelectorAll<HTMLElement>("[data-scene]"));
+    stages.current = Array.from(document.querySelectorAll<HTMLElement>("[data-stage]"));
     const m = motion.current;
 
     const onMove = (e: PointerEvent) => {
@@ -216,8 +235,11 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
     const { viewport, size } = state;
     const wide = size.width >= 1024;
 
+    // Below desktop the shape docks into the on-screen frame nearest the middle of the viewport.
+    const dock = wide ? null : nearestStage(stages.current);
+
     // Scroll drives the story.
-    const target = readScrollProgress(sections.current);
+    const target = dock ? dock.index : readScrollProgress(sections.current);
     m.progress += (target - m.progress) * (1 - Math.exp(-6 * dt));
     const scene = Math.round(m.progress);
 
@@ -225,6 +247,7 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
     u.uProgress.value = m.progress;
     u.uPixelRatio.value = gl.getPixelRatio();
     u.uCalm.value = calm ? 1 : 0;
+    u.uSize.value = wide ? 4.2 : 3.2;
 
     // Cursor pushes particles aside (mouse only; on touch it would fight scrolling).
     if (m.pointerActive) {
@@ -239,7 +262,7 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
     if (focusOn) u.uFocusCenter.value.fromArray(PART_CENTERS[sceneBus.focus]);
     u.uFocusAmt.value += ((focusOn ? 1 : 0) - u.uFocusAmt.value) * (1 - Math.exp(-8 * dt));
 
-    // Layout: right column on wide screens, centred and dimmed behind the copy on small ones.
+    // Layout: right column on wide screens; below that, inside the nearest frame (hidden when none is visible).
     const k = 1 - Math.exp(-4 * dt);
     let tx = 0;
     let ty = 0;
@@ -248,14 +271,21 @@ function Particles({ count, calm }: { count: number; calm: boolean }) {
     if (wide) {
       tx = viewport.width * 0.24;
       ts = Math.min(1, viewport.height / 6.2);
+    } else if (dock) {
+      // Map the frame's screen rect into world units at z = 0.
+      const unit = viewport.height / size.height;
+      const r = dock.rect;
+      tx = (r.left + r.width / 2 - size.width / 2) * unit;
+      ty = (size.height / 2 - (r.top + r.height / 2)) * unit;
+      ts = Math.min((r.height * unit) / 6.2, (r.width * unit) / 5);
     } else {
-      ts = Math.min(0.78, viewport.width / 5.2);
-      if (scene === 0) {
-        // Phones: keep the core small and in the free space above the headline.
-        const phone = viewport.aspect < 0.7;
-        ts *= phone ? 0.85 : 1;
-        ty = viewport.height * (phone ? 0.27 : 0.2);
-      } else dim = 0.4;
+      dim = 0;
+    }
+    if (dock) {
+      // Track the frame exactly so the shape scrolls with the page.
+      g.position.set(tx, ty, 0);
+      if (!m.placed || Math.abs(g.scale.x - ts) > 0.4) g.scale.setScalar(ts);
+      m.placed = true;
     }
     if (!m.placed) {
       g.position.set(tx, ty, 0);

@@ -1,6 +1,7 @@
 
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { founder } from "@/data/portfolio";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -20,7 +21,11 @@ export const viewport: Viewport = {
   colorScheme: "dark",
 };
 
-const siteUrl = "https://tunudoley.in";
+const siteUrl = founder.website;
+const description =
+  "Tunu Doley is a founder building an AI company, and takes on a few paid projects: AI features and agents, zero-to-one products, and technical direction.";
+const shareDescription =
+  "Founder building an AI company, and taking on a few interesting tech projects along the way.";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
@@ -30,14 +35,14 @@ export const metadata: Metadata = {
     template: "%s | Tunu Doley",
   },
 
-  description:
-    "Tunu Doley is a technology entrepreneur building an AI company, and takes on a few paid projects: AI features and agents, zero-to-one products, and technical direction.",
+  description,
 
   applicationName: "Tunu Doley Portfolio",
 
   keywords: [
     "Tunu Doley",
     "Tunu Doley founder",
+    "Tunu Doley India",
     "Tunu Doley AI",
     "AI founder India",
     "AI startup founder",
@@ -68,24 +73,13 @@ export const metadata: Metadata = {
     url: siteUrl,
     siteName: "Tunu Doley",
     title: "Tunu Doley | Founder Building in AI",
-    description:
-      "Founder building an AI company, and taking on a few interesting tech projects along the way.",
-    images: [
-      {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Tunu Doley, founder building in AI",
-      },
-    ],
+    description: shareDescription,
   },
 
   twitter: {
     card: "summary_large_image",
     title: "Tunu Doley | Founder Building in AI",
-    description:
-      "Founder building an AI company, and taking on a few interesting tech projects along the way.",
-    images: ["/og-image.jpg"],
+    description: shareDescription,
   },
 
   robots: {
