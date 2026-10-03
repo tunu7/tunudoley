@@ -17,10 +17,10 @@ export function CopyEmail({ email }: { email: string }) {
 
   return (
     <div className="flex flex-col gap-3 sm:flex-row">
-      <a href={`mailto:${email}`} className="btn btn-primary h-12 px-6">
+      <a href={`mailto:${email}`} className="btn btn-ink">
         Write me an email ↗
       </a>
-      <button type="button" onClick={copy} className="btn btn-ghost h-12 px-6 font-mono text-sm" aria-live="polite">
+      <button type="button" onClick={copy} className="btn btn-line font-mono text-sm" aria-live="polite">
         {copied ? "Copied ✓" : email}
       </button>
     </div>

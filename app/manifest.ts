@@ -8,8 +8,8 @@ export default function manifest(): MetadataRoute.Manifest {
       "Tunu Doley is a founder building an AI company, and takes on a few interesting tech projects.",
     start_url: "/",
     display: "standalone",
-    background_color: "#0a0a0b",
-    theme_color: "#0a0a0b",
+    background_color: "#eeebe4",
+    theme_color: "#eeebe4",
     icons: [
       {
         src: "/icon.svg",
