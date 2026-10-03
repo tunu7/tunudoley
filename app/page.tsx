@@ -1,16 +1,9 @@
 import { founder, ventures, services, principles } from "@/data/portfolio";
 import { Nav } from "@/components/Nav";
-import { HeroCanvas, BlobCanvas } from "@/components/Scenes";
-import { FlipCard } from "@/components/FlipCard";
-import { Tilt } from "@/components/Tilt";
-import { Cube, Layers, Orbit } from "@/components/Objects3D";
-import { VentureStack } from "@/components/VentureStack";
-import { PrinciplesRing } from "@/components/PrinciplesRing";
+import { SectionNav } from "@/components/SectionNav";
+import { SceneLayer } from "@/components/scene/SceneLayer";
+import { FocusCard } from "@/components/FocusCard";
 import { CopyEmail } from "@/components/CopyEmail";
-
-const serviceObjects = [Orbit, Cube, Layers];
-
-const marquee = ["AI products", "agents", "zero to one", "shipping", "first principles", "long term"];
 
 export default function HomePage() {
   const personSchema = {
@@ -48,7 +41,7 @@ export default function HomePage() {
   };
 
   return (
-    <main id="top" className="relative min-h-screen overflow-x-clip bg-paper text-ink">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
@@ -58,252 +51,249 @@ export default function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(organizationSchema) }}
       />
 
+      <div className="backdrop-grid" aria-hidden="true" />
+      <SceneLayer />
       <Nav />
+      <SectionNav />
 
-      {/* Hero */}
-      <section
-        aria-labelledby="hero-heading"
-        className="relative flex h-[100svh] min-h-[640px] items-end overflow-hidden"
-      >
-        <div className="hero-grid" aria-hidden="true" />
-        <HeroCanvas className="absolute inset-0" />
-
-        <div className="hero-exit pointer-events-none relative mx-auto w-full max-w-6xl px-5 pb-16 sm:px-8 sm:pb-20">
-          <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-ink/10 bg-paper/70 px-3 py-1.5 text-xs text-ink/70 backdrop-blur">
-            <span className="relative flex size-2">
-              <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-60" />
-              <span className="relative inline-flex size-2 rounded-full bg-accent" />
-            </span>
-            Hey, I&apos;m {founder.name}. Founder, building in AI
-          </p>
-
-          <h1
-            id="hero-heading"
-            className="max-w-5xl text-[clamp(2.75rem,7vw,6rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-          >
-            Building an AI company.
-            <br />
-            Open to <span className="font-serif font-normal italic tracking-[-0.02em] text-accent">interesting</span> work.
-          </h1>
-
-          <p className="mt-6 max-w-md text-lg leading-relaxed text-ink/65">
-            Most of my time goes into my own company. The rest goes into a few paid projects I
-            can&apos;t stop thinking about.
-          </p>
-
-          <div className="pointer-events-auto mt-8 flex flex-wrap gap-3">
-            <a href="#ventures" className="key-btn key-btn-dark h-12 px-6 text-sm">
-              See what I&apos;m building ↗
-            </a>
-            <a href="#work" className="key-btn h-12 px-6 text-sm">
-              Work with me
-            </a>
-          </div>
-        </div>
-
-        <p className="pointer-events-none absolute bottom-6 right-6 hidden items-center gap-2 text-xs text-ink/50 md:flex">
-          <span className="inline-block animate-bounce">✦</span> psst — grab a shape and throw it
-        </p>
-      </section>
-
-      {/* Marquee band */}
-      <div className="band-stage relative z-10 -my-6 py-10" aria-hidden="true">
-        <div className="band bg-ink text-paper">
-          <div className="band-track">
-            {[0, 1].map((k) => (
-              <span key={k} className="flex shrink-0 items-center">
-                {marquee.map((w) => (
-                  <span key={w} className="flex items-center px-6 font-serif text-3xl italic sm:text-4xl">
-                    {w}
-                    <span className="ml-12 text-accent not-italic">✺</span>
-                  </span>
-                ))}
-              </span>
-            ))}
-          </div>
-        </div>
-      </div>
-
-      {/* About */}
-      <section id="about" aria-labelledby="about-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
-        <div className="mx-auto grid max-w-6xl items-center gap-16 md:grid-cols-[0.9fr_1.1fr]">
-          <div className="reveal-3d order-2 md:order-1">
-            <FlipCard name={founder.name} location={founder.location} email={founder.email} />
-          </div>
-
-          <div className="order-1 md:order-2">
-            <SectionLabel n="01" label="About" />
-            <h2
-              id="about-heading"
-              className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-            >
-              Founder first.
-              <br />
-              <Serif>Engineer</Serif> at heart.
-            </h2>
-            <div className="reveal-3d mt-8 max-w-lg space-y-5 text-lg leading-relaxed text-ink/65">
-              <p>
-                I like problems that look impossible on day one and obvious by day ninety. AI has made a
-                lot more of them worth taking on, so I&apos;m building a company around it.
+      <main className="relative z-10">
+        {/* Hero */}
+        <section
+          id="top"
+          data-scene
+          data-spin
+          aria-labelledby="hero-heading"
+          className="relative flex min-h-[100svh] touch-pan-y items-end px-5 pb-14 pt-28 sm:px-8 lg:items-center lg:pb-0"
+        >
+          <div className="mx-auto w-full max-w-6xl">
+            <div className="lg:max-w-[56%]">
+              <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-line bg-bg/60 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.12em] text-fg/70 backdrop-blur">
+                <span className="relative flex size-1.5">
+                  <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-70" />
+                  <span className="relative inline-flex size-1.5 rounded-full bg-accent" />
+                </span>
+                {founder.name} · Founder, building in AI
               </p>
-              <p>
-                I stay close to the code, get from idea to working product quickly, and care more about what
-                ships than what sounds good in a pitch deck. That&apos;s also what I bring to client work.
+
+              <h1
+                id="hero-heading"
+                className="text-[clamp(2.6rem,7vw,5.25rem)] font-semibold leading-[0.98] tracking-[-0.045em]"
+              >
+                <span className="block">Building an AI company.</span>
+                <span className="block text-fg/45">
+                  Open to <span className="text-accent">interesting</span> work.
+                </span>
+              </h1>
+
+              <p className="mt-6 max-w-lg text-lg leading-relaxed text-fg/65">
+                Most of my time goes into my own company. The rest goes into a few paid projects I
+                can&apos;t stop thinking about.
               </p>
+
+              <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+                <a href="#ventures" className="btn btn-primary h-12 px-6">
+                  See what I&apos;m building ↓
+                </a>
+                <a href="#work" className="btn btn-ghost h-12 px-6">
+                  Work with me
+                </a>
+              </div>
+
+              <Caption className="mt-10 hidden sm:flex">Drag to spin the core · scroll to see it change</Caption>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      {/* Ventures */}
-      <section id="ventures" aria-labelledby="ventures-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
-        <div className="mx-auto max-w-6xl">
-          <SectionLabel n="02" label="Building" />
-          <h2
-            id="ventures-heading"
-            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-          >
-            What I&apos;m <Serif>building.</Serif>
+        {/* About */}
+        <Section id="about" n="01" label="About" headingId="about-heading">
+          <h2 id="about-heading" className="heading">
+            Founder first. <span className="text-accent">Engineer</span> at heart.
           </h2>
-          <p className="reveal-3d mt-5 max-w-md text-lg leading-relaxed text-ink/60">
+          <div className="mt-6 space-y-5 text-lg leading-relaxed text-fg/65">
+            <p>
+              I like problems that look impossible on day one and obvious by day ninety. AI has made a lot more
+              of them worth taking on, so I&apos;m building a company around it.
+            </p>
+            <p>
+              I stay close to the code, get from idea to working product quickly, and care more about what ships
+              than what sounds good in a pitch deck. That&apos;s also what I bring to client work.
+            </p>
+          </div>
+
+          <dl className="panel mt-10 grid grid-cols-1 sm:grid-cols-2">
+            {[
+              ["Currently", "Building an AI company"],
+              ["Also", "Taking on select projects"],
+              ["Based in", founder.location],
+              ["Reach me", founder.email],
+            ].map(([k, v], i) => (
+              <div
+                key={k}
+                className={`border-line px-5 py-4 ${i > 0 ? "border-t" : ""} ${i === 1 ? "sm:border-t-0" : ""} ${
+                  i % 2 === 0 ? "sm:border-r" : ""
+                }`}
+              >
+                <dt className="font-mono text-[11px] uppercase tracking-[0.14em] text-fg/40">{k}</dt>
+                <dd className="mt-1 break-words">{v}</dd>
+              </div>
+            ))}
+          </dl>
+
+          <Caption className="mt-6">Two strands, founder and engineer, wound into one</Caption>
+        </Section>
+
+        {/* Building */}
+        <Section id="ventures" n="02" label="Building" headingId="ventures-heading">
+          <h2 id="ventures-heading" className="heading">
+            What I&apos;m <span className="text-accent">building.</span>
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-fg/60">
             One company, a few client projects and a steady stream of experiments.
           </p>
 
-          <div className="reveal-3d mt-14">
-            <VentureStack ventures={ventures} />
+          <div className="mt-10 flex flex-col gap-3">
+            {ventures.map((v, i) => (
+              <FocusCard key={v.id} index={i} className="p-6">
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-fg/40">{v.id}</span>
+                    <h3 className="text-xl font-semibold tracking-tight">{v.name}</h3>
+                  </div>
+                  <span className="status">
+                    <span className="size-1.5 rounded-full bg-accent" />
+                    {v.status}
+                  </span>
+                </div>
+                <p className="mt-1 font-mono text-xs text-fg/45">{v.category}</p>
+                <p className="mt-4 leading-relaxed text-fg/65">{v.description}</p>
+              </FocusCard>
+            ))}
           </div>
-        </div>
-      </section>
 
-      {/* Work with me */}
-      <section id="work" aria-labelledby="work-heading" className="scroll-mt-24 px-5 py-28 sm:px-8 lg:py-36">
-        <div className="mx-auto max-w-6xl">
-          <SectionLabel n="03" label="Work with me" />
-          <h2
-            id="work-heading"
-            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-          >
-            Got a hard problem? <Serif>Good.</Serif>
+          <Caption className="mt-6">Hover or tap a card to light up its part of the system</Caption>
+        </Section>
+
+        {/* Work with me */}
+        <Section id="work" n="03" label="Work with me" headingId="work-heading">
+          <h2 id="work-heading" className="heading">
+            Got a hard problem? <span className="text-accent">Good.</span>
           </h2>
-          <p className="reveal-3d mt-5 max-w-lg text-lg leading-relaxed text-ink/60">
-            I take on a few paid projects at a time, and only ones I find genuinely interesting. If yours is
-            one of them, you get my full attention.
+          <p className="mt-5 text-lg leading-relaxed text-fg/60">
+            I take on a few paid projects at a time, and only ones I find genuinely interesting. If yours is one
+            of them, you get my full attention.
           </p>
 
-          <div className="mt-14 grid gap-5 md:grid-cols-3">
-            {services.map(({ title, body }, i) => {
-              const Object = serviceObjects[i % serviceObjects.length];
-              return (
-                <div key={title} className="reveal-3d">
-                  <Tilt className="h-full rounded-[28px] border border-ink/8 bg-[#fffaf0]">
-                    <article className="flex h-full flex-col p-7">
-                      <Object className="pop-z mx-auto my-6 h-40 w-40" />
-                      <span className="pop-z-sm mt-4 font-mono text-xs text-ink/40">0{i + 1}</span>
-                      <h3 className="pop-z-sm mt-1 text-2xl font-medium tracking-tight">{title}</h3>
-                      <p className="mt-2 leading-relaxed text-ink/60">{body}</p>
-                    </article>
-                  </Tilt>
+          <div className="mt-10 flex flex-col gap-3">
+            {services.map((s, i) => (
+              <FocusCard key={s.title} index={i} className="p-6">
+                <div className="flex items-baseline gap-3">
+                  <span className="font-mono text-xs text-fg/40">0{i + 1}</span>
+                  <h3 className="text-xl font-semibold tracking-tight">{s.title}</h3>
                 </div>
-              );
-            })}
+                <p className="mt-3 leading-relaxed text-fg/65">{s.body}</p>
+              </FocusCard>
+            ))}
           </div>
 
-          <div className="reveal-3d mt-12 flex flex-col items-start gap-5 rounded-[28px] border border-dashed border-ink/20 p-7 sm:flex-row sm:items-center sm:justify-between">
-            <p className="max-w-xl text-lg leading-relaxed">
-              <span className="font-medium">A good fit:</span>{" "}
-              <span className="text-ink/60">
-                a clear problem, a team that moves quickly, and room to do it properly.
-              </span>
+          <div className="mt-6 flex flex-col items-start gap-4 rounded-2xl border border-dashed border-accent/40 bg-bg/60 p-6 backdrop-blur sm:flex-row sm:items-center sm:justify-between">
+            <p className="leading-relaxed">
+              <span className="font-semibold">A good fit:</span>{" "}
+              <span className="text-fg/60">a clear problem, a team that moves quickly, and room to do it properly.</span>
             </p>
             <a
               href={`mailto:${founder.email}?subject=${encodeURIComponent("A project you might find interesting")}`}
-              className="key-btn key-btn-dark h-12 shrink-0 px-6 text-sm"
+              className="btn btn-primary h-11 shrink-0 px-5 text-sm"
             >
               Pitch me your project ↗
             </a>
           </div>
-        </div>
-      </section>
 
-      {/* Principles */}
-      <section
-        id="principles"
-        aria-labelledby="principles-heading"
-        className="scroll-mt-24 overflow-hidden px-5 py-28 sm:px-8 lg:py-36"
-      >
-        <div className="mx-auto max-w-6xl">
-          <SectionLabel n="04" label="Principles" />
-          <h2
-            id="principles-heading"
-            className="reveal-3d text-[clamp(2.5rem,6vw,4.75rem)] font-medium leading-[0.95] tracking-[-0.05em]"
-          >
-            How I <Serif>work.</Serif>
+          <Caption className="mt-6">Agents, products, direction: hover a service to see its shape</Caption>
+        </Section>
+
+        {/* How I work */}
+        <Section id="principles" n="04" label="How I work" headingId="principles-heading">
+          <h2 id="principles-heading" className="heading">
+            How I <span className="text-accent">work.</span>
           </h2>
-        </div>
-        <div className="reveal-3d mt-10">
-          <PrinciplesRing principles={principles} />
-        </div>
-      </section>
+          <ol className="mt-10 grid gap-px overflow-hidden rounded-2xl border border-line bg-line sm:grid-cols-2">
+            {principles.map((p, i) => (
+              <li
+                key={p}
+                className="flex items-baseline gap-4 bg-bg/90 px-5 py-4 backdrop-blur transition-colors hover:bg-[#141416]"
+              >
+                <span className="font-mono text-xs text-accent">{String(i + 1).padStart(2, "0")}</span>
+                <span className="text-[1.05rem] font-medium">{p}</span>
+              </li>
+            ))}
+          </ol>
+          <Caption className="mt-6">A steady field underneath everything else</Caption>
+        </Section>
 
-      {/* Contact */}
-      <section
-        id="contact"
-        aria-labelledby="contact-heading"
-        className="contact-lift relative scroll-mt-0 overflow-hidden rounded-t-[40px] bg-ink px-5 pt-24 text-paper sm:px-8 lg:pt-32"
-      >
-        <div className="mx-auto grid max-w-6xl items-center gap-6 md:grid-cols-[1.1fr_0.9fr]">
-          <div className="relative z-10">
-            <SectionLabel n="05" label="Contact" dark />
-            <h2
-              id="contact-heading"
-              className="text-[clamp(2.75rem,7vw,5.5rem)] font-medium leading-[0.92] tracking-[-0.055em]"
-            >
-              Building something
-              <br />
-              <Serif className="text-accent">interesting?</Serif>
-            </h2>
-            <p className="mt-6 max-w-md text-lg leading-relaxed text-paper/60">
-              A project you need built, an AI idea you want pressure-tested, or just a good conversation about
-              what&apos;s next. Tell me what you&apos;re working on. Short emails are welcome.
-            </p>
-            <div className="mt-10">
-              <CopyEmail email={founder.email} />
-            </div>
-          </div>
-
-          <div className="relative -mx-5 h-[360px] sm:mx-0 md:h-[520px]">
-            <BlobCanvas className="absolute inset-0" />
-            <p className="pointer-events-none absolute bottom-4 left-1/2 -translate-x-1/2 text-xs text-paper/40">
-              poke it
-            </p>
-          </div>
-        </div>
-
-        <footer className="mx-auto mt-16 flex max-w-6xl flex-col justify-between gap-2 border-t border-paper/10 py-8 text-sm text-paper/45 md:flex-row">
-          <p>
-            © {new Date().getFullYear()} {founder.name}
+        {/* Contact */}
+        <Section id="contact" n="05" label="Contact" headingId="contact-heading">
+          <h2 id="contact-heading" className="heading">
+            Building something <span className="text-accent">interesting?</span>
+          </h2>
+          <p className="mt-6 text-lg leading-relaxed text-fg/60">
+            A project you need built, an AI idea you want pressure-tested, or just a good conversation about
+            what&apos;s next. Tell me what you&apos;re working on. Short emails are welcome.
           </p>
-          <p>{founder.headline}</p>
+          <div className="mt-10">
+            <CopyEmail email={founder.email} />
+          </div>
+        </Section>
+
+        <footer className="relative px-5 sm:px-8">
+          <div className="mx-auto flex max-w-6xl flex-col justify-between gap-2 border-t border-line py-8 font-mono text-xs text-fg/40 sm:flex-row">
+            <p>
+              © {new Date().getFullYear()} {founder.name}
+            </p>
+            <p>{founder.headline}</p>
+          </div>
         </footer>
-      </section>
-    </main>
+      </main>
+    </>
   );
 }
 
-function SectionLabel({ n, label, dark = false }: { n: string; label: string; dark?: boolean }) {
+function Section({
+  id,
+  n,
+  label,
+  headingId,
+  children,
+}: {
+  id: string;
+  n: string;
+  label: string;
+  headingId: string;
+  children: React.ReactNode;
+}) {
   return (
-    <p
-      className={`mb-6 inline-flex items-center gap-2 rounded-full border px-3 py-1 font-mono text-[11px] uppercase tracking-[0.14em] ${
-        dark ? "border-paper/15 text-paper/50" : "border-ink/10 text-ink/50"
-      }`}
+    <section
+      id={id}
+      data-scene
+      aria-labelledby={headingId}
+      className="relative flex min-h-[100svh] items-center px-5 py-24 sm:px-8 lg:py-32"
     >
-      <span>{n}</span>
-      <span className="opacity-40">/</span>
-      <span>{label}</span>
+      <div className="mx-auto w-full max-w-6xl">
+        <div className="reveal lg:max-w-[52%]">
+          <p className="mb-5 font-mono text-xs uppercase tracking-[0.16em] text-accent">
+            {n} <span className="text-fg/30">/</span> {label}
+          </p>
+          {children}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function Caption({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <p className={`flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.14em] text-fg/40 ${className}`}>
+      <span className="inline-block size-1.5 shrink-0 rounded-full border border-accent" />
+      {children}
     </p>
   );
-}
-
-function Serif({ children, className = "" }: { children: React.ReactNode; className?: string }) {
-  return <span className={`font-serif font-normal italic tracking-[-0.02em] ${className}`}>{children}</span>;
 }
