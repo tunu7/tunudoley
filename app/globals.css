@@ -210,6 +210,195 @@ body {
   }
 }
 
+/* --- Film grain over everything, for photographic depth --- */
+body::after {
+  content: "";
+  position: fixed;
+  inset: -50%;
+  z-index: 90;
+  pointer-events: none;
+  opacity: 0.07;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation: grain 1.2s steps(6) infinite;
+}
+@keyframes grain {
+  0% { transform: translate(0, 0); }
+  20% { transform: translate(-3%, 2%); }
+  40% { transform: translate(2%, -3%); }
+  60% { transform: translate(-2%, -1%); }
+  80% { transform: translate(3%, 3%); }
+  100% { transform: translate(0, 0); }
+}
+
+/* --- Hero: the window ---
+ * --p: scroll progress through the pinned hero (set by useScrollVar)
+ * --q: how open the arch is; --r: how much of the inside is revealed
+ * --mx/--my: smoothed pointer position, -1 → 1
+ */
+.hero {
+  --p: 0;
+  --mx: 0;
+  --my: 0;
+  --q: clamp(0, calc((var(--p) - 0.04) * 2.1), 1);
+  --r: clamp(0, calc((var(--p) - 0.5) * 3), 1);
+  --it: 22%;
+  --is: 8%;
+  --ib: 25%;
+}
+@media (min-width: 1024px) {
+  .hero {
+    --it: 13%;
+    --is: 34%;
+    --ib: 11%;
+  }
+}
+.hero-window {
+  clip-path: inset(
+    calc(var(--it) * (1 - var(--q))) calc(var(--is) * (1 - var(--q))) calc(var(--ib) * (1 - var(--q)))
+      round calc((1 - var(--q)) * 60vw) calc((1 - var(--q)) * 60vw) 0 0
+  );
+}
+.hero-photo {
+  transform: translate3d(calc(var(--mx) * -18px), calc(var(--my) * -14px), 0) scale(calc(1.18 - var(--q) * 0.12));
+}
+.hero-atom {
+  transform: translate(-50%, -50%) translate3d(calc(var(--mx) * 34px), calc(var(--my) * 26px), 0)
+    scale(calc(1 + var(--q) * 0.9));
+  opacity: calc(1 - var(--q) * 1.6);
+}
+.hero-shade {
+  opacity: calc(0.12 + var(--r) * 0.5);
+}
+.hero-inside {
+  opacity: var(--r);
+  transform: translateY(calc((1 - var(--r)) * 48px));
+}
+.hero-name > span {
+  font-size: clamp(5rem, 24vw, 15rem);
+  line-height: 0.8;
+}
+.hero-tunu {
+  left: 5vw;
+  top: 8%;
+  transform: translate3d(calc(var(--q) * -60vw + var(--mx) * 10px), 0, 0);
+}
+.hero-doley {
+  right: 5vw;
+  bottom: 13%;
+  transform: translate3d(calc(var(--q) * 60vw + var(--mx) * 10px), 0, 0);
+}
+@media (min-width: 1024px) {
+  .hero-name > span {
+    font-size: clamp(5rem, 13.5vw, 15rem);
+  }
+  .hero-tunu {
+    left: auto;
+    right: 64%;
+    top: 50%;
+    transform: translate3d(calc(var(--q) * -45vw + var(--mx) * 12px), calc(-50% + var(--my) * 6px), 0);
+  }
+  .hero-doley {
+    right: auto;
+    left: 64%;
+    bottom: auto;
+    top: 50%;
+    transform: translate3d(calc(var(--q) * 45vw + var(--mx) * 12px), calc(-50% + var(--my) * 6px), 0);
+  }
+}
+.hero-meta {
+  opacity: calc(1 - var(--q) * 2.5);
+}
+
+/* --- Manifesto: words light up in reading order --- */
+.manifesto {
+  --p: 0;
+}
+.manifesto-word {
+  opacity: clamp(0.13, calc(var(--p) * (var(--n) + 4) - var(--w)), 1);
+  transition: opacity 0.2s linear;
+}
+.manifesto-photo {
+  translate: 0 0.08em;
+  scale: clamp(0.4, calc(var(--p) * (var(--n) + 4) - var(--w)), 1);
+  transition:
+    opacity 0.2s linear,
+    scale 0.4s ease;
+}
+
+/* --- Chapters: vertical scroll drives a horizontal track (large screens) --- */
+.chapter-panel {
+  position: relative;
+  min-height: 100svh;
+}
+.chapter-number {
+  color: transparent;
+  -webkit-text-stroke: 1px rgb(242 240 235 / 0.35);
+  line-height: 0.8;
+}
+@media (min-width: 1024px) {
+  .chapters {
+    --p: 0;
+    height: calc(var(--n) * 100svh);
+  }
+  .chapters-pin {
+    position: sticky;
+    top: 0;
+    height: 100svh;
+    overflow: hidden;
+  }
+  .chapters-track {
+    display: flex;
+    height: 100%;
+    width: calc(var(--n) * 100vw);
+    transform: translate3d(calc(var(--p) * (var(--n) - 1) * -100vw), 0, 0);
+    will-change: transform;
+  }
+  .chapter-panel {
+    width: 100vw;
+    height: 100%;
+    min-height: 0;
+    flex: none;
+  }
+  /* Each panel's photo slides at its own speed: --local is 0 when the panel is centred. */
+  .chapter-panel {
+    --local: calc(var(--p) * (var(--n) - 1) - var(--i, 0));
+  }
+  .chapter-photo {
+    transform: translate3d(calc(var(--local) * -14%), 0, 0);
+  }
+  .chapter-number {
+    transform: translate3d(calc(var(--local) * 30%), 0, 0);
+  }
+  .chapters-progress {
+    width: calc(var(--p) * 100%);
+  }
+}
+
+/* --- Rule stack: cards sink back as the next slides over --- */
+.rule-card {
+  --c: 0;
+}
+.rule-card-inner {
+  transform: scale(calc(1 - var(--c) * 0.08));
+  transform-origin: 50% 0;
+  filter: brightness(calc(1 - var(--c) * 0.55));
+}
+
+/* --- Process: the line draws itself --- */
+@supports (animation-timeline: view()) {
+  .draw-line {
+    transform-origin: 0 50%;
+    animation: draw-line linear both;
+    animation-timeline: view();
+    animation-range: entry 30% cover 60%;
+  }
+}
+@keyframes draw-line {
+  from {
+    transform: scaleX(0);
+  }
+}
+
 /* --- Glyph motion --- */
 .spin {
   animation: spin linear infinite;

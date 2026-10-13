@@ -1,10 +1,11 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-/** Fixed left rail: the current chapter number over a hairline and a vertical "Scroll". */
+/** Fixed left rail: chapter number, a hairline that fills with page progress, and "Scroll". */
 export function SideRail() {
   const [current, setCurrent] = useState("01");
+  const bar = useRef<HTMLSpanElement>(null);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-rail]"));
@@ -15,7 +16,23 @@ export function SideRail() {
       { rootMargin: "-50% 0px -50% 0px" },
     );
     sections.forEach((s) => io.observe(s));
-    return () => io.disconnect();
+
+    let frame = 0;
+    const update = () => {
+      frame = 0;
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.current?.style.setProperty("transform", `scaleY(${max > 0 ? window.scrollY / max : 0})`);
+    };
+    const onScroll = () => {
+      if (!frame) frame = requestAnimationFrame(update);
+    };
+    update();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      io.disconnect();
+      cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+    };
   }, []);
 
   return (
@@ -26,7 +43,9 @@ export function SideRail() {
       <span key={current} className="fade-in tabular-nums">
         {current}
       </span>
-      <span className="h-16 w-px bg-current opacity-50" />
+      <span className="relative h-24 w-px bg-current/30">
+        <span ref={bar} className="absolute inset-0 origin-top scale-y-0 bg-current" />
+      </span>
       <span className="[writing-mode:vertical-rl] rotate-180 opacity-60">Scroll</span>
     </div>
   );
