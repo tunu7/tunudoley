@@ -43,7 +43,7 @@ export function Hero() {
   }, []);
 
   return (
-    <section ref={ref} id="top" data-rail="01" aria-labelledby="hero-heading" className="hero relative h-[260svh] bg-paper">
+    <section ref={ref} id="top" data-rail="01" aria-labelledby="hero-heading" className="hero relative h-[180svh] bg-paper">
       <div className="sticky top-0 h-[100svh] overflow-hidden bg-paper">
         {/* The window */}
         <div className="hero-window absolute inset-0 bg-dark text-paper">

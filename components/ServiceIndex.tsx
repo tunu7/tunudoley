@@ -14,7 +14,7 @@ const ART = [
 
 /**
  * Services as an editorial index. On pointer devices an arch-framed photograph follows the
- * cursor, lagging slightly behind it; on touch the photo sits inline in each row.
+ * cursor, lagging slightly behind it.
  */
 export function ServiceIndex() {
   const [active, setActive] = useState<number | null>(null);
@@ -50,12 +50,12 @@ export function ServiceIndex() {
     <div onMouseLeave={() => setActive(null)}>
       <ol className="border-t border-ink">
         {services.map((s, i) => {
-          const { Icon, photo, alt } = ART[i];
+          const { Icon } = ART[i];
           return (
             <li
               key={s.title}
               onMouseEnter={() => setActive(i)}
-              className="service-row group grid gap-5 border-b border-line py-8 md:grid-cols-12 md:items-center md:gap-8 md:py-10"
+              className="service-row group grid gap-4 border-b border-line py-7 md:grid-cols-12 md:items-center md:gap-8 md:py-10"
             >
               <div className="flex items-center gap-5 md:col-span-1">
                 <span className="label text-ink/45">0{i + 1}</span>
@@ -66,9 +66,6 @@ export function ServiceIndex() {
               <div className="flex items-start gap-4 md:col-span-4 md:col-start-9">
                 <Icon className="size-9 shrink-0 text-ink/70" />
                 <p className="leading-relaxed text-ink/65">{s.body}</p>
-              </div>
-              <div className="arch relative aspect-[4/3] w-full md:hidden">
-                <Image src={photo} alt={alt} fill sizes="90vw" placeholder="blur" className="object-cover" />
               </div>
             </li>
           );
