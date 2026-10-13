@@ -16,13 +16,14 @@ export function CopyEmail({ email }: { email: string }) {
   };
 
   return (
-    <div className="flex flex-col gap-3 sm:flex-row">
-      <a href={`mailto:${email}`} className="btn btn-ink">
-        Write me an email ↗
-      </a>
-      <button type="button" onClick={copy} className="btn btn-line font-mono text-sm" aria-live="polite">
-        {copied ? "Copied ✓" : email}
+    <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-7">
+      <button type="button" onClick={copy} className="pill" aria-live="polite">
+        <span className="truncate">{copied ? "Copied to clipboard ✓" : email}</span>
+        <span className="label shrink-0 opacity-60">{copied ? "" : "Copy"}</span>
       </button>
+      <a href={`mailto:${email}`} className="label link-line whitespace-nowrap text-paper">
+        Write to me →
+      </a>
     </div>
   );
 }

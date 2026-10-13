@@ -1,10 +1,14 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-paper: #eeebe4;
-  --color-ink: #0e0e0e;
-  --color-accent: #ff4a1c;
-  --color-line: rgb(14 14 14 / 0.16);
+  --color-paper: #efece6;
+  --color-ink: #171613;
+  --color-dark: #0e0e0d;
+  --color-forest: #1d2a22;
+  --color-olive: #9a9f44;
+  --color-indigo: #4b4d9e;
+  --color-amber: #d38c3b;
+  --color-line: rgb(23 22 19 / 0.14);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-serif: var(--font-instrument-serif);
@@ -25,50 +29,21 @@ body {
   color: var(--color-paper);
 }
 
-/* The fluid simulation. Sized to the large viewport so mobile toolbars don't reset it. */
-.ink-canvas {
-  height: 100lvh;
-  background: var(--color-ink);
-}
-
-/*
- * The page is a paper stencil laid over the ink. With `screen`, paper stays paper and
- * anything black becomes a window, so every dark letter shows the live fluid beneath.
- */
-.stencil {
-  position: relative;
-  z-index: 10;
-  background: var(--color-paper);
-  mix-blend-mode: screen;
-}
-
 @layer components {
-  .display {
-    font-weight: 800;
-    letter-spacing: -0.055em;
-    line-height: 0.86;
-  }
-
-  .heading {
-    font-size: clamp(2.6rem, 7vw, 6.5rem);
-    font-weight: 800;
-    line-height: 0.9;
-    letter-spacing: -0.05em;
-    text-wrap: balance;
-  }
-
-  .serif {
+  /* Tall, condensed all-caps serif: the title-card voice. */
+  .caps {
     font-family: var(--font-serif);
-    font-style: italic;
     font-weight: 400;
-    letter-spacing: -0.02em;
+    text-transform: uppercase;
+    line-height: 0.88;
+    letter-spacing: -0.01em;
   }
 
   .label {
     font-family: var(--font-geist-mono);
     font-size: 11px;
     text-transform: uppercase;
-    letter-spacing: 0.14em;
+    letter-spacing: 0.16em;
   }
 
   .link-line {
@@ -80,80 +55,241 @@ body {
     background-size: 100% 1px;
   }
 
+  a:focus-visible,
+  button:focus-visible {
+    outline: 1.5px solid currentColor;
+    outline-offset: 4px;
+  }
+
   .btn {
     display: inline-flex;
     align-items: center;
-    justify-content: center;
     gap: 0.6rem;
     height: 3.25rem;
-    padding: 0 1.6rem;
+    padding: 0 1.75rem;
     border-radius: 999px;
-    font-weight: 600;
-    white-space: nowrap;
-    transition:
-      transform 0.25s ease,
-      background-color 0.25s ease,
-      color 0.25s ease;
-  }
-  .btn:active {
-    transform: scale(0.97);
-  }
-  .btn:focus-visible,
-  a:focus-visible,
-  button:focus-visible {
-    outline: 2px solid var(--color-ink);
-    outline-offset: 3px;
-  }
-  /* Solid ink, so the fluid swirls inside the button too. */
-  .btn-ink {
     background: var(--color-ink);
     color: var(--color-paper);
+    font-family: var(--font-geist-mono);
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    transition: transform 0.25s ease;
   }
-  .btn-ink:hover {
+  .btn:hover {
     transform: translateY(-2px);
   }
-  .btn-line {
-    border: 1.5px solid var(--color-ink);
+
+  /* Email pill on the contact section, like a newsletter field. */
+  .pill {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem;
+    width: min(100%, 22rem);
+    height: 3.25rem;
+    padding: 0 0.6rem 0 1.5rem;
+    border-radius: 999px;
+    background: var(--color-paper);
+    color: var(--color-ink);
+    transition: transform 0.25s ease;
   }
-  .btn-line:hover {
-    background: var(--color-ink);
+  .pill:hover {
+    transform: translateY(-2px);
+  }
+  .pill .label {
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    background: var(--color-forest);
     color: var(--color-paper);
+    opacity: 1;
   }
 
-  .row {
-    transition: padding 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  /* Rounded-top arch window, a true semicircle on a 3:4 panel. */
+  .arch {
+    border-radius: 50% 50% 0 0 / 37.5% 37.5% 0 0;
+    overflow: hidden;
   }
-  @media (hover: hover) {
-    .row:hover {
-      padding-left: 1.25rem;
+
+  .frame {
+    outline: 1px solid rgb(255 255 255 / 0.08);
+    outline-offset: -12px;
+  }
+
+  .level-tab {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    padding: 0.9rem 1rem;
+    text-align: left;
+    border: 1px solid rgb(239 236 230 / 0.15);
+    border-radius: 999px;
+    color: rgb(239 236 230 / 0.5);
+    transition:
+      color 0.3s ease,
+      border-color 0.3s ease,
+      background-color 0.3s ease;
+  }
+  .level-tab:hover {
+    color: var(--color-paper);
+  }
+  .level-tab.is-active {
+    color: var(--color-dark);
+    background: var(--color-paper);
+    border-color: var(--color-paper);
+  }
+  @media (min-width: 1024px) {
+    .level-tab {
+      padding: 1.25rem 0;
+      border: 0;
+      border-top: 1px solid rgb(239 236 230 / 0.15);
+      border-radius: 0;
+    }
+    .level-tab.is-active {
+      color: var(--color-paper);
+      background: transparent;
+      border-color: var(--color-paper);
     }
   }
 }
 
-/* Content rises in as it scrolls into view (progressive enhancement). */
+/* Soft light leaking through the dark, standing in for the hero photograph. */
+.haze {
+  background:
+    radial-gradient(60% 50% at 50% 45%, rgb(239 236 230 / 0.09), transparent 70%),
+    radial-gradient(40% 35% at 15% 85%, rgb(211 140 59 / 0.08), transparent 70%),
+    radial-gradient(45% 40% at 85% 15%, rgb(75 77 158 / 0.1), transparent 70%);
+}
+
+/* --- Glyph motion --- */
+.spin {
+  animation: spin linear infinite;
+}
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.drift {
+  animation: drift 60s linear infinite;
+}
+@keyframes drift {
+  to {
+    rotate: 360deg;
+  }
+}
+
+.trace {
+  stroke-dasharray: 420;
+  animation: trace 4s ease-in-out infinite alternate;
+}
+@keyframes trace {
+  from {
+    stroke-dashoffset: 420;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.pulse {
+  stroke-width: 2;
+  stroke-dasharray: 6 200;
+  animation: pulse 2.4s linear infinite;
+}
+@keyframes pulse {
+  from {
+    stroke-dashoffset: 6;
+  }
+  to {
+    stroke-dashoffset: -200;
+  }
+}
+
+.ray {
+  animation: ray 3s ease-in-out infinite;
+}
+@keyframes ray {
+  50% {
+    opacity: 0.25;
+  }
+}
+
+.blink {
+  animation: blink 1.1s steps(1) infinite;
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.swing {
+  transform-origin: 100px 24px;
+  animation: swing 2.6s ease-in-out infinite alternate;
+}
+@keyframes swing {
+  from {
+    transform: rotate(-24deg);
+  }
+  to {
+    transform: rotate(24deg);
+  }
+}
+
+/* --- Page motion --- */
 @supports (animation-timeline: view()) {
   .reveal {
     animation: reveal linear both;
     animation-timeline: view();
     animation-range: entry 0% cover 25%;
   }
+
+  /* The arch opens into a full-bleed panel as it crosses the viewport. */
+  .arch-reveal {
+    animation: arch-open linear both;
+    animation-timeline: view();
+    animation-range: entry 10% cover 55%;
+  }
 }
 
 @keyframes reveal {
   from {
     opacity: 0;
-    transform: translateY(48px);
+    transform: translateY(40px);
+  }
+}
+
+@keyframes arch-open {
+  from {
+    clip-path: inset(0 22% 0 22% round 50vw 50vw 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0 round 0);
+  }
+}
+
+.fade-in {
+  animation: fade-in 0.6s ease both;
+}
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
   }
 }
 
 .rise {
-  animation: rise 1.1s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+  animation: rise 1.3s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
-
 @keyframes rise {
   from {
     opacity: 0;
-    transform: translateY(0.35em);
+    transform: translateY(0.4em);
+    filter: blur(8px);
   }
 }
 
@@ -161,13 +297,10 @@ body {
   html {
     scroll-behavior: auto;
   }
-  .reveal,
-  .rise {
-    animation: none !important;
-  }
   *,
   *::before,
   *::after {
+    animation: none !important;
     transition-duration: 0.01ms !important;
   }
 }
