@@ -19,10 +19,10 @@ export function CopyEmail({ email }: { email: string }) {
     <div className="flex flex-col items-center gap-5 sm:flex-row sm:gap-7">
       <button type="button" onClick={copy} className="pill" aria-live="polite">
         <span className="truncate">{copied ? "Copied to clipboard ✓" : email}</span>
-        <span className="label shrink-0 opacity-60">{copied ? "" : "Copy"}</span>
+        <span className="label shrink-0">{copied ? "" : "Copy"}</span>
       </button>
       <a href={`mailto:${email}`} className="label link-line whitespace-nowrap text-paper">
-        Write to me →
+        Write to me ↗
       </a>
     </div>
   );

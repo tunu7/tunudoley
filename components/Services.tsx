@@ -1,58 +1,77 @@
 "use client";
 
+import Image from "next/image";
 import { useState } from "react";
 import { services } from "@/data/portfolio";
-import { glyphs, type GlyphName } from "./Glyphs";
+import { img } from "@/lib/images";
+import { Chip, Network, Orbit } from "./Glyphs";
 
-const ART: GlyphName[] = ["Network", "Orbit", "Chip"];
+const ART = [
+  { photo: img.corridor, alt: "A long, bright corridor of server racks", Icon: Network },
+  { photo: img.chip, alt: "An opened 486 processor showing the silicon die", Icon: Chip },
+  { photo: img.array, alt: "Radio telescope dishes pointed at the same patch of sky", Icon: Orbit },
+];
 
-/** Amenities-style list: hover or focus a service and the framed drawing beside it changes. */
+/** The amenities list: hover or focus a service and the photograph beside it changes. */
 export function Services() {
   const [active, setActive] = useState(0);
-  const Art = glyphs[ART[active]];
 
   return (
-    <div className="grid items-start gap-10 md:grid-cols-12 lg:gap-16">
-      <div className="frame relative aspect-square bg-dark text-paper md:col-span-5 lg:col-span-4">
-        <div key={active} className="fade-in absolute inset-0 grid place-items-center p-10">
-          <Art className="w-full max-w-[18rem]" />
-        </div>
-        <p className="label absolute bottom-5 left-5 text-paper/55">Fig. 0{active + 1}</p>
+    <div className="grid items-center gap-10 md:grid-cols-12 lg:gap-20">
+      <div className="relative aspect-[4/5] max-h-[78svh] overflow-hidden md:col-span-5">
+        {ART.map(({ photo, alt }, i) => (
+          <Image
+            key={alt}
+            src={photo}
+            alt={alt}
+            fill
+            sizes="(min-width: 768px) 40vw, 100vw"
+            placeholder="blur"
+            className={`object-cover transition-[opacity,transform] duration-[1200ms] ${
+              i === active ? "scale-100 opacity-100" : "scale-110 opacity-0"
+            }`}
+          />
+        ))}
+        <p className="label absolute bottom-4 left-4 text-paper mix-blend-difference">Fig. 0{active + 1}</p>
       </div>
 
-      <ol className="md:col-span-7 lg:col-span-8">
-        {services.map((s, i) => (
-          <li key={s.title} className="border-t border-line last:border-b">
-            <button
-              type="button"
-              onMouseEnter={() => setActive(i)}
-              onFocus={() => setActive(i)}
-              onClick={() => setActive(i)}
-              aria-pressed={i === active}
-              className="group flex w-full items-baseline gap-6 py-7 text-left"
-            >
-              <span className="label shrink-0 text-ink/45">0{i + 1}</span>
-              <span>
-                <span
-                  className={`block font-serif text-[clamp(1.9rem,3.6vw,2.9rem)] leading-none transition-colors duration-300 ${
-                    i === active ? "text-ink" : "text-ink/35 group-hover:text-ink/70"
-                  }`}
-                >
-                  {s.title}
-                </span>
-                <span
-                  className={`grid transition-[grid-template-rows,opacity] duration-500 ${
-                    i === active ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
-                  }`}
-                >
-                  <span className="overflow-hidden">
-                    <span className="block max-w-md pt-4 leading-relaxed text-ink/70">{s.body}</span>
+      <ol className="md:col-span-7">
+        {services.map((s, i) => {
+          const { Icon } = ART[i];
+          const on = i === active;
+          return (
+            <li key={s.title} className="border-b border-line">
+              <button
+                type="button"
+                onMouseEnter={() => setActive(i)}
+                onFocus={() => setActive(i)}
+                onClick={() => setActive(i)}
+                aria-pressed={on}
+                className="group flex w-full items-start gap-5 py-6 text-left"
+              >
+                <Icon className={`mt-1 size-9 shrink-0 transition-opacity ${on ? "opacity-100" : "opacity-30"}`} />
+                <span className="min-w-0">
+                  <span
+                    className={`display block text-[clamp(1.8rem,3.2vw,2.6rem)] transition-colors duration-300 ${
+                      on ? "text-ink" : "text-ink/35 group-hover:text-ink/70"
+                    }`}
+                  >
+                    {s.title}
+                  </span>
+                  <span
+                    className={`grid transition-[grid-template-rows,opacity] duration-500 ${
+                      on ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"
+                    }`}
+                  >
+                    <span className="overflow-hidden">
+                      <span className="block max-w-md pt-3 leading-relaxed text-ink/65">{s.body}</span>
+                    </span>
                   </span>
                 </span>
-              </span>
-            </button>
-          </li>
-        ))}
+              </button>
+            </li>
+          );
+        })}
       </ol>
     </div>
   );
