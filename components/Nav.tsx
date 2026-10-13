@@ -14,7 +14,7 @@ export function Nav() {
       <div className="flex h-20 items-center justify-between gap-4">
         <a href="#top" className="flex flex-col leading-none">
           <span className="font-serif text-[1.7rem] tracking-tight">Tunu Doley</span>
-          <span className="label mt-1 text-[8.5px] opacity-60">Founder · AI</span>
+          <span className="label mt-1 text-[8.5px] opacity-60">Tech Entrepreneur</span>
         </a>
 
         <nav aria-label="Main navigation" className="label hidden items-center gap-9 lg:flex">
