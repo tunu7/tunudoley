@@ -1,4 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
-  <rect width="64" height="64" rx="14" fill="#0e0e0e"/>
-  <text x="32" y="42" text-anchor="middle" font-family="ui-monospace, SFMono-Regular, Menlo, monospace" font-size="26" font-weight="700" fill="#eeebe4">TD</text>
+  <rect width="64" height="64" rx="14" fill="#f2f0eb"/>
+  <path d="M13 58V27a19 19 0 0 1 38 0v31z" fill="#1a1916"/>
+  <!-- "T" from Instrument Serif, outlined so it renders without the web font -->
+  <path transform="translate(22.6 52) scale(0.0408 -0.0408)" fill="#f2f0eb" stroke="#f2f0eb" stroke-width="16" stroke-linejoin="round" d="M118 0Q103 0 103 11Q103 22 116 23L161 30Q181 33 188 40.5Q195 48 195 69V669Q195 683 189 689Q183 695 164 695Q127 695 91 663Q55 631 44 560L39 527Q37 514 25 514Q10 514 12 531L21 712Q23 735 39 735Q46 735 52 731.5Q58 728 72.5 724Q87 720 119 720H342Q374 720 388.5 724Q403 728 409.5 731.5Q416 735 422 735Q438 735 440 712L449 531Q451 514 436 514Q424 514 422 527L417 560Q407 631 371 663Q335 695 297 695Q278 695 272 689Q266 683 266 669V69Q266 48 273.5 40.5Q281 33 300 30L345 23Q358 22 358 11Q358 0 343 0Z"/>
 </svg>
